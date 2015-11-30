@@ -12,3 +12,4 @@ public class MainActivity extends AppCompatActivity {
         // det her lort virker - kim tester lortet
     }
 }
+//ABE
