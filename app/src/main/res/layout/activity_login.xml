@@ -40,7 +40,8 @@
         android:text="@string/loginButtonText"
         android:id="@+id/loginButton"
         android:layout_below="@+id/passwordInput"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="login" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -50,6 +51,7 @@
         android:id="@+id/createNewUserButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:onClick="createNewUser"
         />
 
 </RelativeLayout>
