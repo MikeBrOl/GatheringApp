@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         else
         {
-            Toast failedLogin = Toast.makeText(this,"R.string.loginFailed",Toast.LENGTH_SHORT);
+            Toast failedLogin = Toast.makeText(this,R.string.loginFailed,Toast.LENGTH_SHORT);
             failedLogin.show();
         }
     }
