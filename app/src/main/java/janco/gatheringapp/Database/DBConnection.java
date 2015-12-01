@@ -38,15 +38,15 @@ public class DBConnection
         }
         catch (SQLException se)
         {
-            Log.e("ERRO", se.getMessage());
+            Log.e("ERROR", se.getMessage());
         }
         catch (ClassNotFoundException e)
         {
-            Log.e("ERRO", e.getMessage());
+            Log.e("ERROR", e.getMessage());
         }
         catch (Exception e)
         {
-            Log.e("ERRO", e.getMessage());
+            Log.e("ERROR", e.getMessage());
         }
 
         return conn;
