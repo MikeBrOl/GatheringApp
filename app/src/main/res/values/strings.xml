@@ -11,6 +11,6 @@
     <string name="newEmailInputHint">Email</string>
     <string name="newAddressInputHint">Adresse</string>
     <string name="newNameInputHint">Navn</string>
-    <string name="newUsernameInputHint">Bruger Navn</string>
+    <string name="newUserNameInputHint">Bruger Navn</string>
     <string name="createUserFailed">Brugeren Blev Ikke Oprettet. Bruger Navnet Findes Allerrede</string>
 </resources>

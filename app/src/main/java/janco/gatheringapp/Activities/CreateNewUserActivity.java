@@ -21,7 +21,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
 
     public void createNewUser()
     {
-        EditText newUsername = (EditText) findViewById(R.id.newUsernameInput);
+        EditText newUsername = (EditText) findViewById(R.id.newUserNameInput);
         EditText newName = (EditText) findViewById(R.id.newNameInput);
         EditText newAddress = (EditText) findViewById(R.id.newAddressInput);
         EditText newEmail = (EditText) findViewById(R.id.newEmailInput);
