@@ -28,7 +28,7 @@ public class UserModelTest extends AndroidTestCase
 
         User newTestUser = new User(username, name, password, email, lastKnownLocation);
 
-        assertEquals("testEmail", newTestUser.getEmail());
+        Assert.assertEquals("testEmail", newTestUser.getEmail());
 
     }
 }
