@@ -21,7 +21,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
 
     public void createNewUser()
     {
-        EditText newUserName = (EditText) findViewById(R.id.newUserNameInput);
+        EditText newUsername = (EditText) findViewById(R.id.newUsernameInput);
         EditText newName = (EditText) findViewById(R.id.newNameInput);
         EditText newAddress = (EditText) findViewById(R.id.newAddressInput);
         EditText newEmail = (EditText) findViewById(R.id.newEmailInput);
@@ -33,10 +33,10 @@ public class CreateNewUserActivity extends AppCompatActivity {
         {
             User user = new User();
             DBUser dbUser = new DBUser();
-            user.setUserName = userNameString;
-            user.setName = nameString;
-            user.setAddress = addressString;
-            user.setEmail = emailString;
+            user.setUsername(userNameString);
+            user.setName(nameString);
+            user.setAddress(addressString);
+            user.setEmail(emailString);
             dbUser.insertUser(user);
 
             Intent login = new Intent(this, LoginActivity.class);
