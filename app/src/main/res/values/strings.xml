@@ -9,7 +9,7 @@
     //CreateNewUserActivity strings
     <string name="createButtonText">Opret</string>
     <string name="newEmailInputHint">Email</string>
-    <string name="newAddressInputHint">Adresse</string>
+    <string name="newPasswordInputHint">Password</string>
     <string name="newNameInputHint">Navn</string>
     <string name="newUserNameInputHint">Bruger Navn</string>
     <string name="createUserFailed">Brugeren Blev Ikke Oprettet. Bruger Navnet Findes Allerrede</string>

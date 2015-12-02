@@ -23,11 +23,11 @@ public class CreateNewUserActivity extends AppCompatActivity {
     {
         EditText newUsername = (EditText) findViewById(R.id.newUserNameInput);
         EditText newName = (EditText) findViewById(R.id.newNameInput);
-        EditText newAddress = (EditText) findViewById(R.id.newAddressInput);
+        EditText newPassword = (EditText) findViewById(R.id.newPasswordInput);
         EditText newEmail = (EditText) findViewById(R.id.newEmailInput);
         String userNameString = newUsername.getText().toString();
         String nameString = newName.getText().toString();
-        String addressString = newAddress.getText().toString();
+        String passwordString = newPassword.getText().toString();
         String emailString = newEmail.getText().toString();
         try
         {
@@ -35,7 +35,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
             DBUser dbUser = new DBUser();
             user.setUsername(userNameString);
             user.setName(nameString);
-            user.setAddress(addressString);
+            user.setPassword(passwordString);
             user.setEmail(emailString);
             dbUser.insertUser(user);
 

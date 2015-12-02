@@ -38,11 +38,11 @@
         android:layout_height="wrap_content"
         android:text=""
         android:ems="10"
-        android:id="@+id/newAddressInput"
+        android:id="@+id/newPasswordInput"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="140dp"
-        android:hint="@string/newAddressInputHint"
+        android:hint="@string/newPasswordInputHint"
         />
 
     <EditText
