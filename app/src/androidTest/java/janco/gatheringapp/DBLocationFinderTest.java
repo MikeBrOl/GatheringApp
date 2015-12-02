@@ -72,6 +72,7 @@ Aalborg lat, long = 57.02 and 9.54
         longMax 13.00;
         longMin = 8;
 
+        // there has to be users in the database
         foundUsers = dbLocationFinder.getUsersByRadiusAndStatus(latMax, latMin, longMax, longMin, status);
 
         Assert.assertNotNull(foundUsers);
@@ -79,6 +80,9 @@ Aalborg lat, long = 57.02 and 9.54
         // check what the list contains?
 
     }
+
+    /*
+
     public void testFindNotices()
     {
         List<Notice> foundNotices = new List<Notice>();
@@ -89,6 +93,7 @@ Aalborg lat, long = 57.02 and 9.54
 
         Assert.assertNotNull(foundNotices);
     }
+    */
 
 
 }
