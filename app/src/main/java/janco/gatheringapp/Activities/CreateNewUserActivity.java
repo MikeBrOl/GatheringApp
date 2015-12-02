@@ -3,6 +3,7 @@ package janco.gatheringapp.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,7 +20,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_new_user);
     }
 
-    public void createNewUser()
+    public void createNewUser(View view)
     {
         EditText newUsername = (EditText) findViewById(R.id.newUserNameInput);
         EditText newName = (EditText) findViewById(R.id.newNameInput);
