@@ -25,7 +25,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
         EditText newName = (EditText) findViewById(R.id.newNameInput);
         EditText newAddress = (EditText) findViewById(R.id.newAddressInput);
         EditText newEmail = (EditText) findViewById(R.id.newEmailInput);
-        String userNameString = newUserName.getText().toString();
+        String userNameString = newUsername.getText().toString();
         String nameString = newName.getText().toString();
         String addressString = newAddress.getText().toString();
         String emailString = newEmail.getText().toString();
