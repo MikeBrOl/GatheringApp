@@ -65,7 +65,7 @@ public class DBUserTest extends AndroidTestCase
     }
 
 
-    public void getAllUsersTest()
+    public void testGetAllUsers()
     {
         List<User> users = userDB.getAllUsers();
 
