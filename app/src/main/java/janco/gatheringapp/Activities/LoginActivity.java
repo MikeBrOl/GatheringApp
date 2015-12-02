@@ -3,8 +3,13 @@ package janco.gatheringapp.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import org.jasypt.util.password.BasicPasswordEncryptor;
+
+import janco.gatheringapp.Database.DBUser;
+import janco.gatheringapp.Model.User;
 
 import janco.gatheringapp.R;
 
@@ -16,13 +21,21 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
-    public void login()
+    public void login(View view)
     {
         EditText loginUserName = (EditText) findViewById(R.id.userNameInput);
         EditText password = (EditText) findViewById(R.id.passwordInput);
         String loginString = loginUserName.getText().toString();
         String passwordString = password.getText().toString();
-        if(verifacation(loginString, passwordString))
+
+        DBUser userDB = new DBUser();
+
+        User user = userDB.getUserByUsername(loginString);
+
+        BasicPasswordEncryptor pe = new BasicPasswordEncryptor();
+        String encryptedPassword = user.getPassword();
+
+        if(pe.checkPassword(passwordString, encryptedPassword))
         {
             Intent loginWork = new Intent(this, NoticeOverviewActivity.class);
             startActivity(loginWork);
@@ -33,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             failedLogin.show();
         }
     }
-    public void createNewUser()
+    public void createNewUser(View view)
     {
         Intent newUser = new Intent(this, CreateNewUserActivity.class);
         startActivity(newUser);
