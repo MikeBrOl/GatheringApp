@@ -1,8 +1,16 @@
 <resources>
     <string name="app_name">GatheringApp</string>
+    //LoginActivity strings
     <string name="userNameInputHint">Bruger Navn</string>
     <string name="passwordInputHint">Password</string>
     <string name="loginButtonText">Login</string>
     <string name="createNewUserButtonText">Opret Ny Bruger</string>
     <string name="loginFailed">Bruger Navn Eller Adgangkode Er Forkert</string>
+    //CreateNewUserActivity strings
+    <string name="createButtonText">Opret</string>
+    <string name="newEmailInputHint">Email</string>
+    <string name="newAddressInputHint">Adresse</string>
+    <string name="newNameInputHint">Navn</string>
+    <string name="newUserNameInputHint">Bruger Navn</string>
+    <string name="createUserFailed">Brugeren Blev Ikke Oprettet. Bruger Navnet Findes Allerrede</string>
 </resources>
