@@ -15,7 +15,7 @@ public class User
     //GeoPoint lastKnownLocation;
 
     // user's
-    double lastKnownlatitude;
+    double lastKnownLatitude;
     double lastKnownLongitude;
 
     boolean searchStatus;
@@ -32,8 +32,8 @@ public class User
         this.password = password;
         this.email = email;
         //this.lastKnownLocation = lastKnownLocation;
-        this.lastKnownlatitude = lastKnownLatitude;
-        this.lastKnownLongitude = lastKnownLatitude;
+        this.lastKnownLatitude = lastKnownLatitude;
+        this.lastKnownLongitude = lastKnownLongitude;
         this.searchStatus = searchStatus;
     }
 
@@ -80,11 +80,11 @@ public class User
     */
 
     public double getLastKnownlatitude() {
-        return lastKnownlatitude;
+        return lastKnownLatitude;
     }
 
     public void setLastKnownlatitude(double lastKnownlatitude) {
-        this.lastKnownlatitude = lastKnownlatitude;
+        this.lastKnownLatitude = lastKnownlatitude;
     }
 
     public double getLastKnownLongitude() {
@@ -111,7 +111,7 @@ public class User
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", lastKnownlatitude=" + lastKnownlatitude +
+                ", lastKnownLatitude=" + lastKnownLatitude +
                 ", lastKnownLongitude=" + lastKnownLongitude +
                 '}';
     }

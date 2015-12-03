@@ -30,7 +30,6 @@ public class UserModelTest extends AndroidTestCase
         name = "testName";
         password = "testPassword";
         email = "testEmail";
-        //lastKnownLocation = new GeoPoint(30, 30);
         // Aalborg lat, long = 57.02 and 9.54
         lastKnownlatitude = 57.02;
         lastKnownLongitude = 9.54;

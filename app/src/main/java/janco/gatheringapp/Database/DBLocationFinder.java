@@ -40,11 +40,20 @@ public class DBLocationFinder
      * @return foundUsers - found users in data who fit inside the specificed radius
      */
     public ArrayList<User> getUsersByRadiusAndStatus(double latMax, double latMin, double longMax, double longMin,
-                                                int status)
+                                                boolean status)
     {
         // empty list to put found users from database in
         ArrayList<User> foundUsers = new ArrayList<>();
         boolean newUserStatus;
+        int intStatus;
+        if(status)
+        {
+            intStatus = 1;
+        }
+        else
+        {
+            intStatus = 0;
+        }
         DBConnection dbConnection = new DBConnection();
 
         try {
@@ -55,7 +64,7 @@ public class DBLocationFinder
                             "Longitude BETWEEN ? AND ?");
 
             // set parameters for query
-            statement.setInt(1, status);        // status is either 0 or 1
+            statement.setInt(1, intStatus);        // status is either 0 or 1
             statement.setDouble(2, latMin);     // set latMin and latMax
             statement.setDouble(3, latMax);
             statement.setDouble(4, longMin);    // set longMin and longMax

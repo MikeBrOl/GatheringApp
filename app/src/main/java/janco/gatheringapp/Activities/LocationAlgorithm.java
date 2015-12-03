@@ -70,7 +70,6 @@ public class LocationAlgorithm
         double latMax;
         double lonMin;
         double lonMax;
-        int statusInInt;
 
 
         latVar = radius/31;
@@ -80,16 +79,8 @@ public class LocationAlgorithm
         lonMin = longitude-lonVar;
         lonMax = longitude+lonVar;
 
-        if(status)
-        {
-            statusInInt = 1;
-        }
-        else
-        {
-            statusInInt = 0;
-        }
 
-        listOfUsersInRadius.addAll(locationQuery.getUsersByRadiusAndStatus(latMin, lonMin, latMax, lonMax, statusInInt));
+        listOfUsersInRadius.addAll(locationQuery.getUsersByRadiusAndStatus(latMin, lonMin, latMax, lonMax, status));
 
         return listOfUsersInRadius;
     }

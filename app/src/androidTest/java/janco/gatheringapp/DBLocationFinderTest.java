@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import janco.gatheringapp.Database.DBUser;
 import janco.gatheringapp.Model.Notice;
 import janco.gatheringapp.Model.User;
 import janco.gatheringapp.Database.DBLocationFinder;
@@ -65,6 +66,8 @@ Aalborg lat, long = 57.02 and 9.54
         // fill in test data
         // Aalborg lat, long = 57.02 and 9.54
         User testAalborgUser = new User("testUsername", "testName", "testPassword", "testEmail", 57.02, 9.54, true);
+        DBUser dbUser = new DBUser();
+        dbUser.insertUser(testAalborgUser);
 
         ArrayList<User> foundUsers = new ArrayList<>();
 
