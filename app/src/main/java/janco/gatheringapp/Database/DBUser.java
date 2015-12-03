@@ -279,8 +279,5 @@ public class DBUser
         }
 
         return check;
-
-
-
     }
 }
