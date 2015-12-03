@@ -41,14 +41,8 @@ Aalborg lat, long = 57.02 and 9.54
 
     // test data
     double latMax, latMin, longMax, longMin;
-    int status;
+    boolean status;
     Date date;
-
-    // test users
-    User testUser1;
-    User testUser2;
-    User testUser3;
-    User testUser4;
 
     public DBLocationFinderTest()
     {
@@ -82,6 +76,8 @@ Aalborg lat, long = 57.02 and 9.54
         latMin = 54.00;
         longMax = 13.00;
         longMin = 8;
+
+        status = true;
 
         foundUsers = dbLocationFinder.getUsersByRadiusAndStatus(latMax, latMin, longMax, longMin, status);
 

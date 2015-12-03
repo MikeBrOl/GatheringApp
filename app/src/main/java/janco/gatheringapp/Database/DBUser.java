@@ -118,9 +118,10 @@ public class DBUser
         return userList;
     }
 
-    public void insertUser(User user)
+    public int insertUser(User user)
     {
         Connection con = dbConnection.CONN();
+        int check = 0;
 
         try {
             String name = user.getName();
@@ -146,16 +147,16 @@ public class DBUser
 
             Statement stmt = con.createStatement();
             String query = "INSERT INTO Users " +
-                    "VALUES ( '" + name +  "', '" +
-                    username + "', '" +
-                    password + "', '" +
-                    email + "', '" +
-                    lat + "', '" +
-                    lon + "', '" +
-                    searchStatus + "', " +
+                    "VALUES ('"+ name + "', '" +
+                    username +"', '" +
+                    password +"', '" +
+                    email +"', " +
+                    lat + ", " +
+                    lon + ", "+
+                    searchStatus +
                     ");";
-
-            stmt.execute(query);
+            Log.e("Query:",query);
+            check = stmt.executeUpdate(query);
 
         }
         catch (Exception e)
@@ -175,6 +176,7 @@ public class DBUser
                 }
             }
         }
+        return check;
     }
 
     public int deleteUser(User user)
