@@ -217,8 +217,69 @@ public class DBUser
 
     }
 
-    public void updateUser(User user)
+    public int updateUser(User user)
     {
+        Connection con = dbConnection.CONN();
+        int check = 0;
+
+
+        try
+        {
+            String name = user.getName();
+            String username = user.getUsername();
+            String password = user.getPassword();
+            String email = user.getEmail();
+            double longitude = user.getLastKnownLongitude();
+            double latitude = user.getLastKnownlatitude();
+            boolean ss = user.isSearchStatus();
+
+            String lon = String.valueOf(longitude);
+            String lat = String.valueOf(latitude);
+            int searchStatus;
+
+            if(ss == true)
+            {
+                searchStatus = 1;
+            }
+            else
+            {
+                searchStatus = 0;
+            }
+
+            Statement stmt = con.createStatement();
+            String query = "UPDATE Users " +
+                    "SET Name='" + name + "', " +
+                    "Password='" + password + "', " +
+                    "Email='" + email + "', " +
+                    "Latitude='" + lat + "', " +
+                    "Longitude='" + lon + "', " +
+                    "SearchStatus=" + searchStatus +
+                    " WHERE Username='" + username + "';"
+                    ;
+
+            check = stmt.executeUpdate(query);
+
+
+        }
+        catch (Exception e)
+        {
+            Log.e("ERROR", e.getMessage());
+            if (con != null)
+            {
+                try
+                {
+                    System.err.print("Transaction is being rolled back");
+                    con.rollback();
+                }
+                catch (SQLException se)
+                {
+                    Log.e("ERROR", se.getMessage());
+                }
+            }
+        }
+
+        return check;
+
 
 
     }
