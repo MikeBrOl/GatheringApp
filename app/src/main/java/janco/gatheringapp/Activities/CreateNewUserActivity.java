@@ -3,6 +3,7 @@ package janco.gatheringapp.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -36,6 +37,8 @@ public class CreateNewUserActivity extends AppCompatActivity {
         BasicPasswordEncryptor bpe = new BasicPasswordEncryptor();
         String encryptedPassword = bpe.encryptPassword(passwordString);
 
+        int check = 0;
+
         try
         {
             User user = new User();
@@ -44,15 +47,22 @@ public class CreateNewUserActivity extends AppCompatActivity {
             user.setName(nameString);
             user.setPassword(encryptedPassword);
             user.setEmail(emailString);
-            dbUser.insertUser(user);
+            check = dbUser.insertUser(user);
 
-            Intent login = new Intent(this, LoginActivity.class);
-            startActivity(login);
+            if(check == 1)
+            {
+                Intent login = new Intent(this, LoginActivity.class);
+                startActivity(login);
+            }
+            else
+            {
+                Toast failedToCreate = Toast.makeText(this,R.string.createUserFailed,Toast.LENGTH_SHORT);
+                failedToCreate.show();
+            }
         }
         catch(Exception e)
         {
-            Toast failedToCreate = Toast.makeText(this,R.string.createUserFailed,Toast.LENGTH_SHORT);
-            failedToCreate.show();
+            Log.e("ERROR", e.getMessage());
         }
     }
 
