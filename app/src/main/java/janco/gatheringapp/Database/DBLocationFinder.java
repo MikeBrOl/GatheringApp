@@ -54,21 +54,26 @@ public class DBLocationFinder
         {
             intStatus = 0;
         }
+
+        String latMaxString = String.valueOf(latMax);
+        String latMinString = String.valueOf(latMin);
+        String longMaxString = String.valueOf(longMax);
+        String longMinString = String.valueOf(longMin);
+
         DBConnection dbConnection = new DBConnection();
 
         try {
             PreparedStatement statement = dbConnection.CONN().prepareStatement
                     ("SELECT * FROM Users " +
-                            "WHERE SearchStatus = ? AND " +
-                            "Latitude BETWEEN ? AND ? AND" +
-                            "Longitude BETWEEN ? AND ?");
+                            "WHERE Latitude BETWEEN '?' AND '?' AND " +
+                            "Longitude BETWEEN '?' AND '?' AND "+ "SearchStatus = ?");
 
             // set parameters for query
-            statement.setInt(1, intStatus);        // status is either 0 or 1
-            statement.setDouble(2, latMin);     // set latMin and latMax
-            statement.setDouble(3, latMax);
-            statement.setDouble(4, longMin);    // set longMin and longMax
-            statement.setDouble(5, longMax);
+            statement.setInt(5, intStatus);        // status is either 0 or 1
+            statement.setString(1, latMinString);     // set latMin and latMax
+            statement.setString(2, latMaxString);
+            statement.setString(3, longMinString);    // set longMin and longMax
+            statement.setString(4, longMaxString);
 
             ResultSet rs = statement.executeQuery();
 
@@ -82,8 +87,8 @@ public class DBLocationFinder
                 String email = rs.getString("Email");
 
                 // generate geopoint for user
-                double latitude = rs.getDouble("Latitude");
-                double longitude = rs.getDouble("Longitude");
+                double latitude = Double.valueOf(rs.getString("Latitude"));
+                double longitude = Double.valueOf(rs.getString("Longitude"));
                 int newUserIntStatus = rs.getInt("Status");
 
                 if(newUserIntStatus == 1)

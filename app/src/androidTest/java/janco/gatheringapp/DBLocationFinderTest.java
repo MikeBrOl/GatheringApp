@@ -59,7 +59,7 @@ Aalborg lat, long = 57.02 and 9.54
     {
         // fill in test data
         // Aalborg lat, long = 57.02 and 9.54
-        User testAalborgUser = new User("testUsername", "testName", "testPassword", "testEmail", 57.02, 9.54, true);
+        User testAalborgUser = new User("testUsername", "testName", "testPassword", "testEmail", 56.00, 9.54, true);
         DBUser dbUser = new DBUser();
         dbUser.insertUser(testAalborgUser);
 

@@ -3,6 +3,7 @@ package janco.gatheringapp.Database;
 import android.util.Log;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,10 +32,11 @@ public class DBUser
         {
             Connection con = dbConnection.CONN();
 
-            String query = "select * from Users where UserName = " + username;
 
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Users WHERE UserName = ?");
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
             rs.next();
 
             double latitude = Double.parseDouble(rs.getString("Latitude"));
@@ -155,7 +157,7 @@ public class DBUser
                     lon + ", "+
                     searchStatus +
                     ");";
-            Log.e("Query:",query);
+            Log.e("Query:", query);
             check = stmt.executeUpdate(query);
 
         }
@@ -254,7 +256,7 @@ public class DBUser
                     "Latitude='" + lat + "', " +
                     "Longitude='" + lon + "', " +
                     "SearchStatus=" + searchStatus +
-                    " WHERE Username='" + username + "';"
+                    " WHERE UserName='" + username + "';"
                     ;
 
             check = stmt.executeUpdate(query);

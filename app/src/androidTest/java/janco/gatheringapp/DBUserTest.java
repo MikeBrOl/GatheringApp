@@ -27,7 +27,7 @@ public class DBUserTest extends AndroidTestCase
         User user = userDB.getUserByUsername("Test");
 
         //Assert.assertNotNull(user);
-        Assert.assertEquals(user.getUsername(), "Test");
+        Assert.assertEquals("test", user.getUsername());
     }
 
     //Database must not contain a user with the username InsertTest when this test is run
