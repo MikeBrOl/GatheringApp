@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.jasypt.util.password.BasicPasswordEncryptor;
+
 import janco.gatheringapp.Model.User;
 import janco.gatheringapp.Database.DBUser;
 
@@ -30,13 +32,17 @@ public class CreateNewUserActivity extends AppCompatActivity {
         String nameString = newName.getText().toString();
         String passwordString = newPassword.getText().toString();
         String emailString = newEmail.getText().toString();
+
+        BasicPasswordEncryptor bpe = new BasicPasswordEncryptor();
+        String encryptedPassword = bpe.encryptPassword(passwordString);
+
         try
         {
             User user = new User();
             DBUser dbUser = new DBUser();
             user.setUsername(userNameString);
             user.setName(nameString);
-            user.setPassword(passwordString);
+            user.setPassword(encryptedPassword);
             user.setEmail(emailString);
             dbUser.insertUser(user);
 
