@@ -33,7 +33,7 @@ public class DBUserTest extends AndroidTestCase
     //Database must not contain a user with the username InsertTest when this test is run
     public void testInsertUser()
     {
-        User user = new User("InsertTest", "InsertTest", "InsertTest", "InsertTest", null);
+        User user = new User("InsertTest", "InsertTest", "InsertTest", "InsertTest", 57.02, 9.54, false);
         userDB.insertUser(user);
 
         User user2 = userDB.getUserByUsername("InsertTest");
@@ -58,7 +58,7 @@ public class DBUserTest extends AndroidTestCase
     //User with username DeleteTest has to be in the database before this test can be run
     public void testDeleteUser()
     {
-        User user = new User("DeleteTest", "DeleteTest", "DeleteTest", "DeleteTest", null);
+        User user = new User("DeleteTest", "DeleteTest", "DeleteTest", "DeleteTest", 57.02, 9.54, false);
         int check = userDB.deleteUser(user);
 
         Assert.assertEquals(check, 1);

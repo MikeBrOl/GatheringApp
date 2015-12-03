@@ -16,7 +16,13 @@ public class UserModelTest extends AndroidTestCase
     String name;
     String password;
     String email;
-    GeoPoint lastKnownLocation;
+
+    //GeoPoint lastKnownLocation;
+    // user's
+    double lastKnownlatitude;
+    double lastKnownLongitude;
+
+    boolean searchStatus;
 
     public void testCreateUser()
     {
@@ -24,9 +30,14 @@ public class UserModelTest extends AndroidTestCase
         name = "testName";
         password = "testPassword";
         email = "testEmail";
-        lastKnownLocation = new GeoPoint(30, 30);
+        //lastKnownLocation = new GeoPoint(30, 30);
+        // Aalborg lat, long = 57.02 and 9.54
+        lastKnownlatitude = 57.02;
+        lastKnownLongitude = 9.54;
 
-        User newTestUser = new User(username, name, password, email, lastKnownLocation);
+        searchStatus = false;
+
+        User newTestUser = new User(username, name, password, email, lastKnownLongitude, lastKnownLongitude, searchStatus);
 
         Assert.assertEquals("testEmail", newTestUser.getEmail());
 

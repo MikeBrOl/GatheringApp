@@ -12,19 +12,29 @@ public class User
     String name;
     String password;
     String email;
-    GeoPoint lastKnownLocation;
+    //GeoPoint lastKnownLocation;
+
+    // user's
+    double lastKnownlatitude;
+    double lastKnownLongitude;
+
+    boolean searchStatus;
 
     public User()
     {
 
     }
-    public User(String username, String name, String password, String email, GeoPoint lastKnownLocation)
+    public User(String username, String name, String password, String email,
+                double lastKnownLatitude, double lastKnownLongitude, boolean searchStatus)
     {
         this.username = username;
         this.name = name;
         this.password = password;
         this.email = email;
-        this.lastKnownLocation = lastKnownLocation;
+        //this.lastKnownLocation = lastKnownLocation;
+        this.lastKnownlatitude = lastKnownLatitude;
+        this.lastKnownLongitude = lastKnownLatitude;
+        this.searchStatus = searchStatus;
     }
 
     public String getUsername() {
@@ -59,12 +69,38 @@ public class User
         this.email = email;
     }
 
+    /*
     public GeoPoint getLastKnownLocation() {
         return lastKnownLocation;
     }
 
     public void setLastKnownLocation(GeoPoint lastKnownLocation) {
         this.lastKnownLocation = lastKnownLocation;
+    }
+    */
+
+    public double getLastKnownlatitude() {
+        return lastKnownlatitude;
+    }
+
+    public void setLastKnownlatitude(double lastKnownlatitude) {
+        this.lastKnownlatitude = lastKnownlatitude;
+    }
+
+    public double getLastKnownLongitude() {
+        return lastKnownLongitude;
+    }
+
+    public void setLastKnownLongitude(double lastKnownLongitude) {
+        this.lastKnownLongitude = lastKnownLongitude;
+    }
+
+    public boolean isSearchStatus() {
+        return searchStatus;
+    }
+
+    public void setSearchStatus(boolean searchStatus) {
+        this.searchStatus = searchStatus;
     }
 
     @Override
@@ -74,7 +110,8 @@ public class User
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", lastKnownLocation=" + lastKnownLocation +
+                ", lastKnownlatitude=" + lastKnownlatitude +
+                ", lastKnownLongitude=" + lastKnownLongitude +
                 '}';
     }
 }

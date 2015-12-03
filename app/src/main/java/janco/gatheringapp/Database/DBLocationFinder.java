@@ -44,40 +44,48 @@ public class DBLocationFinder
 
         DBConnection dbConnection = new DBConnection();
 
-        PreparedStatement statement = dbConnection.CONN().prepareStatement
-                ("SELECT * FROM Users " +
-                        "WHERE SearchStatus = ? AND " +
-                        "Latitude BETWEEN ? AND ?" +
-                        "Longitude BETWEEN ? AND ?");
+        try {
 
-        // set parameters for query
-        statement.setInt(1, status);        // status is either 0 or 1
-        statement.setDouble(2, latMin);     // set latMin and latMax
-        statement.setDouble(3, latMax);
-        statement.setDouble(4, longMin);    // set longMin and longMax
-        statement.setDouble(5, longMax);
+             PreparedStatement statement = dbConnection.CONN().prepareStatement
+                    ("SELECT * FROM Users " +
+                    "WHERE SearchStatus = ? AND " +
+                    "Latitude BETWEEN ? AND ?" +
+                    "Longitude BETWEEN ? AND ?");
 
-        ResultSet rs = statement.executeQuery();
+            // set parameters for query
+            statement.setInt(1, status);        // status is either 0 or 1
+            statement.setDouble(2, latMin);     // set latMin and latMax
+            statement.setDouble(3, latMax);
+            statement.setDouble(4, longMin);    // set longMin and longMax
+            statement.setDouble(5, longMax);
 
-        // put found users in the foundUsers list
-        while (rs.next())
-        {
-            String username = rs.getString("Username");
-            String name = rs.getString("Name");
-            String password = rs.getString("Password"); // HASH?
-            String email = rs.getString("Email");
+            ResultSet rs = statement.executeQuery();
 
-            // generate geopoint for user
-            double latitude = rs.getDouble("Latitude");
-            double longitude = rs.getDouble("Longitude");
-            GeoPoint lastKnownLocation = new GeoPoint(latitude, longitude);
+            // put found users in the foundUsers list
+            while (rs.next())
+            {
+                String username = rs.getString("Username");
+                String name = rs.getString("Name");
+                String password = rs.getString("Password"); // HASH?
+                String email = rs.getString("Email");
 
-            // generate new user from found resultset
-            User foundUser = new User(username, name, password, email, lastKnownLocation);
+                double latitude = rs.getDouble("Latitude");
+                double longitude = rs.getDouble("Longitude");
+                //GeoPoint lastKnownLocation = new GeoPoint(latitude, longitude);
+                boolean searchStatus = rs.getBoolean("SearchStatus");
 
-            foundUsers.add(foundUser);
+
+                // generate new user from found resultset
+                User foundUser = new User(username, name, password, email, latitude, longitude, searchStatus);
+
+                foundUsers.add(foundUser);
+            }
         }
-
+        catch(SQLException sqle)
+        {
+            sqle.printStackTrace();
+            // message?
+        }
 
         return foundUsers;
     }
@@ -85,6 +93,8 @@ public class DBLocationFinder
     /*
     Find Notices based on radius and date
      */
+
+    /*
     public List<Notice> getNoticesByRadiusAndDate(double latMax, double latMin, double longMax, double LongMin,
                                                   Date date)
     {
@@ -93,6 +103,6 @@ public class DBLocationFinder
 
         return foundNotices;
     }
-
+    */
 
 }
