@@ -29,24 +29,41 @@ public class LocationAlgorithmTest extends AndroidTestCase
 
     public void testLocationAlgorithmForNotices()
     {
-        //TODO create date and status objects
+        boolean testSuccess;
         double mockLatitude = 57.0481705;
         double mockLongitude = 9.92281909999997;
         double mockRadius = 2000;
         Date mockDate = new Date();
         ArrayList<Notice> testList = algorithm.boundingBoxCalculationForNotice(mockLatitude, mockLongitude, mockRadius, mockDate);
-        Assert.assertNotNull(testList);
+
+        if(testList.size() > 0)
+        {
+            testSuccess = true;
+        }
+        else
+        {
+            testSuccess = false;
+        }
+        Assert.assertEquals(true, testSuccess);
     }
 
     public void testLocationAlgorithmForUsers()
     {
-        //TODO create date and status objects
+        boolean testSuccess;
         double mockLatitude = 57.0481705;
         double mockLongitude = 9.92281909999997;
         double mockRadius = 2000;
         boolean mockStatus = true;
         ArrayList<User> testList = algorithm.boundingBoxCalculationForUsers(mockLatitude, mockLongitude, mockRadius, mockStatus);
-        Assert.assertNotNull(testList);
+        if(testList.size() > 0)
+        {
+            testSuccess = true;
+        }
+        else
+        {
+            testSuccess = false;
+        }
+        Assert.assertEquals(true, testSuccess);
     }
 
 }
