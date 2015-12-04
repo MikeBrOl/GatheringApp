@@ -17,6 +17,7 @@ public class UserConnectionModelTest extends AndroidTestCase {
 
 
     public void testCreateConnectionBetweenUsers(User appUser, User connectedUser) {
+
         // appUser information
         String testAppUserUsername = "testAppUserUsername";
         String testAppUserName = "testAppUserName";
@@ -48,7 +49,7 @@ public class UserConnectionModelTest extends AndroidTestCase {
 
 
         // tests for testAppUser
-        Assert.assertSame(testAppUser, newUserConnection.getAppUser());
+        Assert.assertEquals(appUser, newUserConnection.getAppUser());
 
         // tests for testConnectedUser
         Assert.assertSame(connectedUser, newUserConnection.getConnectedUser());
