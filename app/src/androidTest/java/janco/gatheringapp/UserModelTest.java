@@ -1,16 +1,15 @@
 package janco.gatheringapp;
 
-import android.test.AndroidTestCase;
-import junit.framework.Assert;
-import junit.framework.TestCase;
 
 import com.google.android.maps.GeoPoint;
+
+import junit.framework.Assert;
 
 import janco.gatheringapp.Model.User;
 /**
  * Created by Torn on 02-12-2015.
  */
-public class UserModelTest extends AndroidTestCase
+public class UserModelTest
 {
     String username;
     String name;

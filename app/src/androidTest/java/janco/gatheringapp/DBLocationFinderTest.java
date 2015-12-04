@@ -76,6 +76,7 @@ Aalborg lat, long = 57.02 and 9.54
         latMin = 54.00;
         longMax = 13.00;
         longMin = 8;
+        status = true;
 
         status = true;
 
