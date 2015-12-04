@@ -65,8 +65,8 @@ public class DBLocationFinder
         try {
             PreparedStatement statement = dbConnection.CONN().prepareStatement
                     ("SELECT * FROM Users " +
-                            "WHERE Latitude BETWEEN '?' AND '?' AND " +
-                            "Longitude BETWEEN '?' AND '?' AND "+ "SearchStatus = ?");
+                            "WHERE Latitude BETWEEN ? AND ? AND " +
+                            "Longitude BETWEEN ? AND ? AND "+ "SearchStatus = ?");
 
             // set parameters for query
             statement.setInt(5, intStatus);        // status is either 0 or 1
