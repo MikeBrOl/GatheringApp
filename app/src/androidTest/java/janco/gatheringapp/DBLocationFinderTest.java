@@ -1,6 +1,8 @@
 package janco.gatheringapp;
 
 import android.test.AndroidTestCase;
+import android.util.Log;
+
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
@@ -72,14 +74,15 @@ Aalborg lat, long = 57.02 and 9.54
         minLong = 8
         maxLong = 13
          */
-        latMax = 57.00;
-        latMin = 54.00;
-        longMax = 13.00;
-        longMin = 8;
+        latMax = 56.01;
+        latMin = 55.98;
+        longMax = 9.56;
+        longMin = 9.51;
 
         status = true;
 
         foundUsers = dbLocationFinder.getUsersByRadiusAndStatus(latMax, latMin, longMax, longMin, status);
+        Log.e("Array Size", Integer.toString(foundUsers.size()));
 
         Assert.assertEquals("testEmail", foundUsers.get(0).getEmail());
 

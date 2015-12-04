@@ -61,7 +61,10 @@ public class DBUserTest extends AndroidTestCase
     public void testGetAllUsers()
     {
         List<User> users = userDB.getAllUsers();
+        boolean status = false;
+        if(users.size()>0)
+            status = true;
 
-        Assert.assertNotNull(users);
+        Assert.assertEquals(true, status);
     }
 }

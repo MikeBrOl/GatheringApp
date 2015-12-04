@@ -39,8 +39,12 @@ public class DBUser
             ResultSet rs = stmt.executeQuery();
             rs.next();
 
-            double latitude = Double.parseDouble(rs.getString("Latitude"));
-            double longitude = Double.parseDouble(rs.getString("Longitude"));
+            float dbLatitude = rs.getFloat("Latitude");
+            float dbLongitude = rs.getFloat("Longitude");
+
+            double latitude = (double) dbLatitude;
+            double longitude = (double) dbLongitude;
+
             boolean ss;
 
             if(rs.getInt("SearchStatus") == 1)
@@ -84,7 +88,6 @@ public class DBUser
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
-            rs.first();
 
             while (rs.next())
             {
@@ -92,9 +95,12 @@ public class DBUser
                 String username = rs.getString("UserName");
                 String password = rs.getString("Password");
                 String email = rs.getString("Email");
-                double latitude = Double.parseDouble(rs.getString("Latitude"));
-                double longitude = Double.parseDouble(rs.getString("Longitude"));
+                float dbLatitude = rs.getFloat("Latitude");
+                float dbLongitude = rs.getFloat("Longitude");
                 int searchStatus = rs.getInt("SearchStatus");
+
+                double latitude = (double) dbLatitude;
+                double longitude = (double) dbLongitude;
 
                 boolean ss;
                 if (searchStatus == 1)
@@ -134,8 +140,8 @@ public class DBUser
             double latitude = user.getLastKnownlatitude();
             boolean ss = user.isSearchStatus();
 
-            String lon = String.valueOf(longitude);
-            String lat = String.valueOf(latitude);
+            float lon = (float) longitude;
+            float lat = (float) latitude;
             int searchStatus;
 
             if(ss == true)
@@ -235,8 +241,8 @@ public class DBUser
             double latitude = user.getLastKnownlatitude();
             boolean ss = user.isSearchStatus();
 
-            String lon = String.valueOf(longitude);
-            String lat = String.valueOf(latitude);
+            float lon = (float)longitude;
+            float lat = (float)latitude;
             int searchStatus;
 
             if(ss == true)

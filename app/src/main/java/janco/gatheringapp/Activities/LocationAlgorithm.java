@@ -1,5 +1,7 @@
 package janco.gatheringapp.Activities;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -76,15 +78,18 @@ public class LocationAlgorithm
         double lonMax;
 
 
-        latVar = radius/31;
-        lonVar = radius/23.72;
+        latVar = radius/31/3600;
+        lonVar = radius/23.72/3600;
         latMin = latitude-latVar;
         latMax = latitude+latVar;
         lonMin = longitude-lonVar;
         lonMax = longitude+lonVar;
+        Log.e("LatMin:", Double.toString(latMin));
+        Log.e("LatMax:", Double.toString(latMax));
+        Log.e("LonMin:", Double.toString(lonMin));
+        Log.e("LonMax:", Double.toString(lonMax));
 
-
-        listOfUsersInRadius.addAll(locationQuery.getUsersByRadiusAndStatus(latMin, lonMin, latMax, lonMax, status));
+        listOfUsersInRadius.addAll(locationQuery.getUsersByRadiusAndStatus(latMax, latMin, lonMax, lonMin, status));
 
         return listOfUsersInRadius;
     }

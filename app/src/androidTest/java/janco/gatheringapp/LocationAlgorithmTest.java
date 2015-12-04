@@ -50,8 +50,8 @@ public class LocationAlgorithmTest extends AndroidTestCase
     public void testLocationAlgorithmForUsers()
     {
         boolean testSuccess;
-        double mockLatitude = 57.0481705;
-        double mockLongitude = 9.92281909999997;
+        double mockLatitude = 56;
+        double mockLongitude = 9.54;
         double mockRadius = 2000;
         boolean mockStatus = true;
         ArrayList<User> testList = algorithm.boundingBoxCalculationForUsers(mockLatitude, mockLongitude, mockRadius, mockStatus);

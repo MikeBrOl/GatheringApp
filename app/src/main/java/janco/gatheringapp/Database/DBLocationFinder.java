@@ -55,10 +55,10 @@ public class DBLocationFinder
             intStatus = 0;
         }
 
-        String latMaxString = String.valueOf(latMax);
-        String latMinString = String.valueOf(latMin);
-        String longMaxString = String.valueOf(longMax);
-        String longMinString = String.valueOf(longMin);
+        float latMaxFloat = (float) latMax;
+        float latMinFloat = (float) latMin;
+        float longMaxFloat = (float) longMax;
+        float longMinFloat = (float) longMin;
 
         DBConnection dbConnection = new DBConnection();
 
@@ -66,30 +66,33 @@ public class DBLocationFinder
             PreparedStatement statement = dbConnection.CONN().prepareStatement
                     ("SELECT * FROM Users " +
                             "WHERE Latitude BETWEEN ? AND ? AND " +
-                            "Longitude BETWEEN ? AND ? AND "+ "SearchStatus = ?");
+                            "Longitude BETWEEN ? AND ? AND "+
+                            "SearchStatus = ?");
 
             // set parameters for query
-            statement.setInt(5, intStatus);        // status is either 0 or 1
-            statement.setString(1, latMinString);     // set latMin and latMax
-            statement.setString(2, latMaxString);
-            statement.setString(3, longMinString);    // set longMin and longMax
-            statement.setString(4, longMaxString);
+            statement.setFloat(1, latMinFloat);     // set latMin and latMax
+            statement.setFloat(2, latMaxFloat);
+            statement.setFloat(3, longMinFloat);    // set longMin and longMax
+            statement.setFloat(4, longMaxFloat);
+            statement.setInt(5, intStatus);         // status is either 0 or 1
 
             ResultSet rs = statement.executeQuery();
 
-            rs.first();
-
             // put found users in the foundUsers list
             while (rs.next()) {
-                String username = rs.getString("Username");
+                String username = rs.getString("UserName");
                 String name = rs.getString("Name");
                 String password = rs.getString("Password"); // HASH?
                 String email = rs.getString("Email");
 
                 // generate geopoint for user
-                double latitude = Double.valueOf(rs.getString("Latitude"));
-                double longitude = Double.valueOf(rs.getString("Longitude"));
-                int newUserIntStatus = rs.getInt("Status");
+                float dbLatitude = rs.getFloat("Latitude");
+                float dbLongitude = rs.getFloat("Longitude");
+
+                double latitude = (double) dbLatitude;
+                double longitude = (double) dbLongitude;
+
+                int newUserIntStatus = rs.getInt("SearchStatus");
 
                 if(newUserIntStatus == 1)
                 {
@@ -102,6 +105,7 @@ public class DBLocationFinder
 
                 // generate new user from found resultset
                 User foundUser = new User(username, name, password, email, latitude, longitude, newUserStatus);
+                Log.e("User Email", foundUser.getEmail());
 
                 foundUsers.add(foundUser);
             }
@@ -130,7 +134,7 @@ public class DBLocationFinder
             PreparedStatement statement = dbCon.CONN().prepareStatement
                     ("SELECT * FROM Notices " +
                             "WHERE date = ? AND " +
-                            "Latitude BETWEEN ? AND ? AND"
+                            "Latitude BETWEEN ? AND ? AND "
                             +"Longitude BETWEEN ? AND ?");
             statement.setString(1, dateString);
             statement.setDouble(2, latMin);
