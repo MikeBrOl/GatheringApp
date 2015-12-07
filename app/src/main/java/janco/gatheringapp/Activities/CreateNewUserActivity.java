@@ -51,6 +51,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
 
             if(check == 1)
             {
+                //TODO Add toast for success
                 Intent login = new Intent(this, LoginActivity.class);
                 startActivity(login);
             }
