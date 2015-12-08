@@ -13,4 +13,12 @@
     <string name="newNameInputHint">Navn</string>
     <string name="newUserNameInputHint">Bruger Navn</string>
     <string name="createUserFailed">Brugeren Blev Ikke Oprettet. Bruger Navnet Findes Allerrede</string>
+    //CreateNoticeActivity strings
+    <string name="createNoticeNameHint">Navn</string>
+    <string name="createNoticeDescriptionHint">Beskrivelse</string>
+    <string name="createNoticeAddressHint">Adresse</string>
+    <string name="createNoticeButtonText">Opret</string>
+    <string name="createNoticeSelectTimeAndDate">Vælg dato og tid</string>
+    <string name="createNoticeSelectTimeAndDateButtonText">Færdig</string>
+    <string name="createNoticeReturnButtonText">Tilbage</string>
 </resources>

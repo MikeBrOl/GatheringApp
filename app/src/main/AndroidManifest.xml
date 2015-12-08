@@ -21,7 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.CreateNewUserActivity" />
-        <activity android:name=".Activities.NoticeOverviewActivity"></activity>
+        <activity android:name=".Activities.NoticeOverviewActivity" />
+        <activity android:name=".Activities.CreateNotice" />
+        <activity android:name=".Activities.CreateNoticeSelectDateAndTime"></activity>
     </application>
 
 </manifest>
