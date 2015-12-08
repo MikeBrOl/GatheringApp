@@ -21,4 +21,6 @@
     <string name="createNoticeSelectTimeAndDate">Vælg dato og tid</string>
     <string name="createNoticeSelectTimeAndDateButtonText">Færdig</string>
     <string name="createNoticeReturnButtonText">Tilbage</string>
+    <string name="createNoticeSuccess">Opslaget er lavet</string>
+    <string name="createNoticeNotSuccess">Navnet skal være unikt</string>
 </resources>

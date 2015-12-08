@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -67,7 +68,17 @@ public class CreateNotice extends AppCompatActivity {
         double longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
         Notice newNotice = new Notice(noticeNameString, noticeDescriptionString, noticeAddressString, selectedDate, latitude, longitude);
 
-        noticeDB.insertNotice(newNotice);
+        int success = noticeDB.insertNotice(newNotice);
+        if(success == 1)
+        {
+            Toast createNoticeSuccess = Toast.makeText(this, R.string.createNoticeSuccess, Toast.LENGTH_SHORT);
+            createNoticeSuccess.show();
+        }
+        else
+        {
+            Toast createNoticeNotSuccess = Toast.makeText(this, R.string.createNoticeNotSuccess, Toast.LENGTH_SHORT);
+            createNoticeNotSuccess.show();
+        }
     }
 
     public void selectDateAndTime(View view)
@@ -85,7 +96,8 @@ public class CreateNotice extends AppCompatActivity {
             {
                 Bundle res = data.getExtras();
                 String selectedDateString = res.getString("date_result");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy mm:hh");
+                Log.e("Date Format", selectedDateString);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 try{
                     selectedDate = dateFormat.parse(selectedDateString);
                 }
