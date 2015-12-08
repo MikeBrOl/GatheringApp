@@ -17,6 +17,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import janco.gatheringapp.Database.DBNotice;
 import janco.gatheringapp.Model.Notice;
 import janco.gatheringapp.R;
 
@@ -66,7 +67,7 @@ public class CreateNotice extends AppCompatActivity {
         double longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
         Notice newNotice = new Notice(noticeNameString, noticeDescriptionString, noticeAddressString, selectedDate, latitude, longitude);
 
-        noticeDB.insert(newNotice);
+        noticeDB.insertNotice(newNotice);
     }
 
     public void selectDateAndTime(View view)
