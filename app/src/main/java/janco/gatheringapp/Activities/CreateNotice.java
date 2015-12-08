@@ -7,16 +7,14 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
-import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import janco.gatheringapp.Database.DBNotice;
 import janco.gatheringapp.Model.Notice;
@@ -25,14 +23,14 @@ import janco.gatheringapp.R;
 public class CreateNotice extends AppCompatActivity {
 
     static final int PICK_DATE_AND_TIME_REQUEST = 1;
-    private java.util.Date selectedDate;
+    private Date selectedDate;
     private DBNotice noticeDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_notice);
-        selectedDate = new java.util.Date();
         noticeDB = new DBNotice();
+        selectedDate = new Date();
 
     }
 
@@ -64,21 +62,31 @@ public class CreateNotice extends AppCompatActivity {
         getSystemService(Context.LOCATION_SERVICE);
         checkCallingPermission(LOCATION_SERVICE);
 
-        double latitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
-        double longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
+        float latitude = (float)locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
+        float longitude = (float)locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
         Notice newNotice = new Notice(noticeNameString, noticeDescriptionString, noticeAddressString, selectedDate, latitude, longitude);
 
-        int success = noticeDB.insertNotice(newNotice);
-        if(success == 1)
+        if(!noticeNameString.equals(""))
         {
-            Toast createNoticeSuccess = Toast.makeText(this, R.string.createNoticeSuccess, Toast.LENGTH_SHORT);
-            createNoticeSuccess.show();
+            int success = noticeDB.insertNotice(newNotice);
+
+            if(success == 1)
+            {
+                Toast createNoticeSuccess = Toast.makeText(this, R.string.createNoticeSuccess, Toast.LENGTH_SHORT);
+                createNoticeSuccess.show();
+            }
+            else
+            {
+                Toast createNoticeNotSuccess = Toast.makeText(this, R.string.createNoticeNotSuccess, Toast.LENGTH_SHORT);
+                createNoticeNotSuccess.show();
+            }
         }
         else
         {
-            Toast createNoticeNotSuccess = Toast.makeText(this, R.string.createNoticeNotSuccess, Toast.LENGTH_SHORT);
-            createNoticeNotSuccess.show();
+            Toast nameCantBeEmpty = Toast.makeText(this, R.string.createNoticeNameCantBeEmpty, Toast.LENGTH_SHORT);
+            nameCantBeEmpty.show();
         }
+
     }
 
     public void selectDateAndTime(View view)

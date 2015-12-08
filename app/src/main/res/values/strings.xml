@@ -23,4 +23,5 @@
     <string name="createNoticeReturnButtonText">Tilbage</string>
     <string name="createNoticeSuccess">Opslaget er lavet</string>
     <string name="createNoticeNotSuccess">Navnet skal være unikt</string>
+    <string name="createNoticeNameCantBeEmpty">Navne feltet skal være udfyldt</string>
 </resources>
