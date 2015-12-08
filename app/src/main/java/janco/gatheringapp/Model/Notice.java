@@ -1,6 +1,6 @@
 package janco.gatheringapp.Model;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by Mads on 01-12-2015.
