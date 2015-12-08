@@ -96,7 +96,7 @@ Aalborg lat, long = 57.02 and 9.54
 
         date = new Date();
 
-        Notice testNotice = new Notice();
+        //Notice testNotice = new Notice();
 
         foundNotices = dbLocationFinder.getNoticesByRadiusAndDate(latMax, latMin, longMax, longMin, date);
 

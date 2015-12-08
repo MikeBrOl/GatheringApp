@@ -155,8 +155,10 @@ public class DBLocationFinder
                 String tidspunkt = rs.getString("Tidspunkt");
                 double latitude = rs.getDouble("Latitude");
                 double longitude = rs.getDouble("Longitude");
-
-                Notice foundNotice = new Notice();
+                float conLati = (float) latitude;
+                float conLon = (float) longitude;
+                Date dated = new Date();
+                Notice foundNotice = new Notice("","","", dated, conLati,conLon);
 
                 foundNotices.add(foundNotice);
             }

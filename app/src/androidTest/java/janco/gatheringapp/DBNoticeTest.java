@@ -21,7 +21,7 @@ public class DBNoticeTest extends AndroidTestCase
     }
 
     //Database must not contain a notice with name insertTest, when the test is run.
-    public void insertNoticeTest()
+    public void testInsertNoticeTest()
     {
         Date time = new Date();
 
@@ -37,7 +37,7 @@ public class DBNoticeTest extends AndroidTestCase
     }
 
     //Notice with name deleteTest, has to be in the database before the test can be run.
-    public void deleteNoticeTest()
+    public void testDeleteNoticeTest()
     {
         Date time = new Date();
 
