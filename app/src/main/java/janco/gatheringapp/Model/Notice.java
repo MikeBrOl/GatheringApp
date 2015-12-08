@@ -1,5 +1,6 @@
 package janco.gatheringapp.Model;
 
+
 import java.util.Date;
 
 /**
