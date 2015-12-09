@@ -36,7 +36,6 @@ public class User
         this.lastKnownLatitude = lastKnownLatitude;
         this.lastKnownLongitude = lastKnownLongitude;
         this.searchStatus = searchStatus;
-        this.ID = ID;
     }
 
     public String getUsername() {

@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -28,6 +29,7 @@ public class NoticeOverviewActivity extends AppCompatActivity {
     private DBUser dbUser;
     private int radius;
     private String date;
+    private final static String EXTRA_MESSAGE = "janco.gatheringapp.Activities.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +39,21 @@ public class NoticeOverviewActivity extends AppCompatActivity {
         dbUser = new DBUser();
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userLoggedIn = dbUser.getUserByID(mySharedPreferences.getInt("UserID", 0));
+        Date currentDate = new Date();
+        StringBuilder dateString = new StringBuilder();
+        dateString.append(currentDate.getYear()+"-");
+        dateString.append((currentDate.getMonth()+1)+"-");
+        dateString.append(currentDate.getDate()+" ");
+        dateString.append(currentDate.getHours()+":");
+        dateString.append(currentDate.getMinutes()+":");
+        dateString.append(currentDate.getSeconds());
+        String date = dateString.toString();
+        Date delete = new Date();
+
+        radius = 2000;
 
         noticeListView = (ListView) findViewById(R.id.overviewListView);
-        ArrayList<Notice> noticeList = algorithm.boundingBoxCalculationForNotice(userLoggedIn.getLastKnownlatitude(), userLoggedIn.getLastKnownLongitude(), radius, date);
+        ArrayList<Notice> noticeList = algorithm.boundingBoxCalculationForNotice(userLoggedIn.getLastKnownlatitude(), userLoggedIn.getLastKnownLongitude(), radius, delete);
 
         List<Map<String, String>> data = new ArrayList<>();
         for(Notice notice : noticeList)
@@ -55,6 +69,16 @@ public class NoticeOverviewActivity extends AppCompatActivity {
                 new String [] {"name", "date"},
                 new int[] {android.R.id.text1, android.R.id.text2});
         noticeListView.setAdapter(adapter);
+        noticeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent inspectNotice = new Intent(getApplicationContext(), NoticeView.class);
+                Notice entry = (Notice) parent.getItemAtPosition(position);
+                String noticeName = entry.getName();
+                inspectNotice.putExtra("NoticeName", noticeName);
+                startActivity(inspectNotice);
+            }
+        });
 
     }
 
