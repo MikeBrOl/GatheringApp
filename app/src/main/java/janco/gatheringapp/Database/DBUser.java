@@ -63,6 +63,7 @@ public class DBUser
             user.setLastKnownlatitude(latitude);
             user.setLastKnownLongitude(longitude);
             user.setSearchStatus(ss);
+            user.setID(rs.getInt("ID"));
 
             rs.close();
 
@@ -98,6 +99,7 @@ public class DBUser
                 float dbLatitude = rs.getFloat("Latitude");
                 float dbLongitude = rs.getFloat("Longitude");
                 int searchStatus = rs.getInt("SearchStatus");
+                int ID = rs.getInt("ID");
 
                 double latitude = (double) dbLatitude;
                 double longitude = (double) dbLongitude;
@@ -113,6 +115,7 @@ public class DBUser
                 }
 
                 User user = new User(name, username, password, email, latitude, longitude, ss);
+                user.setID(ID);
                 userList.add(user);
             }
             rs.close();
@@ -326,6 +329,7 @@ public class DBUser
             user.setLastKnownlatitude(latitude);
             user.setLastKnownLongitude(longitude);
             user.setSearchStatus(ss);
+            user.setID(rs.getInt("ID"));
 
             rs.close();
         }
