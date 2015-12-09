@@ -5,13 +5,16 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,15 +42,16 @@ public class NoticeOverviewActivity extends AppCompatActivity {
         dbUser = new DBUser();
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userLoggedIn = dbUser.getUserByID(mySharedPreferences.getInt("UserID", 0));
-        Date currentDate = new Date();
+        Calendar currentDate = Calendar.getInstance();
         StringBuilder dateString = new StringBuilder();
-        dateString.append(currentDate.getYear()+"-");
-        dateString.append((currentDate.getMonth()+1)+"-");
-        dateString.append(currentDate.getDate()+" ");
-        dateString.append(currentDate.getHours()+":");
-        dateString.append(currentDate.getMinutes()+":");
-        dateString.append(currentDate.getSeconds());
+        dateString.append(currentDate.get(Calendar.YEAR)+"-");
+        dateString.append((currentDate.get(Calendar.MONTH)+1)+"-");
+        dateString.append(currentDate.get(Calendar.DAY_OF_MONTH)+" ");
+        dateString.append(currentDate.get(Calendar.HOUR)+":");
+        dateString.append(currentDate.get(Calendar.MINUTE)+":");
+        dateString.append(currentDate.get(Calendar.SECOND));
         String date = dateString.toString();
+        Log.e("Date Overview", date);
 
         radius = 2000;
 
@@ -72,8 +76,8 @@ public class NoticeOverviewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent inspectNotice = new Intent(getApplicationContext(), NoticeView.class);
-                Notice entry = (Notice) parent.getItemAtPosition(position);
-                String noticeName = entry.getName();
+                HashMap entry = (HashMap) parent.getItemAtPosition(position);
+                String noticeName = entry.get("name").toString();
                 inspectNotice.putExtra("NoticeName", noticeName);
                 startActivity(inspectNotice);
             }

@@ -112,7 +112,10 @@ public class DBNotice
             stmt.setString(1, name);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-
+            notice.setName(rs.getString("Name"));
+            notice.setDescription(rs.getString("Description"));
+            notice.setAddress(rs.getString("Address"));
+            notice.setTime(rs.getString("Time"));
 
         }
         catch (Exception e)
