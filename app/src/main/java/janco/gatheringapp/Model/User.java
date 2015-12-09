@@ -12,6 +12,7 @@ public class User
     String name;
     String password;
     String email;
+    int ID;
     //GeoPoint lastKnownLocation;
 
     // user's
@@ -68,6 +69,10 @@ public class User
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public void setID(int ID) { this.ID = ID;}
+
+    public int getID() { return ID;}
 
     /*
     public GeoPoint getLastKnownLocation() {

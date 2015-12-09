@@ -1,6 +1,8 @@
 package janco.gatheringapp.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +39,10 @@ public class LoginActivity extends AppCompatActivity {
 
         if(pe.checkPassword(passwordString, encryptedPassword))
         {
+            SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = mySharedPreferences.edit();
+            editor.putInt("UserID", user.getID());
+            editor.apply();
             Intent loginWork = new Intent(this, NoticeOverviewActivity.class);
             startActivity(loginWork);
         }
