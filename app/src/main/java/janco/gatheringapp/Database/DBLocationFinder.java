@@ -149,16 +149,18 @@ public class DBLocationFinder
             while(rs.next())
             {
                 //navn, beskrivelse, billede, addresse, tidspunkt, lokation
-                String navn = rs.getString("Name");
-                String beskrivelse = rs.getString("Description");
-                String addresse = rs.getString("Address");
-                String tidspunkt = rs.getString("Time");
+                String name = rs.getString("Name");
+                String description = rs.getString("Description");
+                String address = rs.getString("Address");
+                String time = rs.getString("Time");
                 double latitude = rs.getDouble("Latitude");
                 double longitude = rs.getDouble("Longitude");
                 float conLati = (float) latitude;
                 float conLon = (float) longitude;
                 String dated = "";
-                Notice foundNotice = new Notice("","","", dated, conLati,conLon);
+                Notice foundNotice = new Notice(name, description, address, dated, conLati,conLon);
+
+                //Notice foundNotice = new Notice()
 
                 foundNotices.add(foundNotice);
             }

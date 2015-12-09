@@ -1,6 +1,7 @@
 package janco.gatheringapp;
 
 import android.test.AndroidTestCase;
+import android.util.Log;
 
 import junit.framework.Assert;
 
@@ -39,6 +40,7 @@ public class LocationAlgorithmTest extends AndroidTestCase
         String mockDate = "2015-12-09 11:22:33";
 
         ArrayList<Notice> testList = algorithm.boundingBoxCalculationForNotice(mockLatitude, mockLongitude, mockRadius, mockDate);
+
 
         if(testList.size() > 0)
         {
