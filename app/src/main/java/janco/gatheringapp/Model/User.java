@@ -26,7 +26,7 @@ public class User
 
     }
     public User(String username, String name, String password, String email,
-                double lastKnownLatitude, double lastKnownLongitude, boolean searchStatus)
+                double lastKnownLatitude, double lastKnownLongitude, boolean searchStatus, int ID)
     {
         this.username = username;
         this.name = name;
@@ -36,6 +36,7 @@ public class User
         this.lastKnownLatitude = lastKnownLatitude;
         this.lastKnownLongitude = lastKnownLongitude;
         this.searchStatus = searchStatus;
+        this.ID = ID;
     }
 
     public String getUsername() {
