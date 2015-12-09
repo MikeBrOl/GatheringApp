@@ -101,7 +101,7 @@ Aalborg lat, long = 57.02 and 9.54
 
         foundNotices = dbLocationFinder.getNoticesByRadiusAndDate(latMax, latMin, longMax, longMin, date);
 
-        Assert.assertEquals("testName", foundNotices.get(0));
+        Assert.assertEquals("testName", foundNotices.get(0).getName());
     }
 
 
