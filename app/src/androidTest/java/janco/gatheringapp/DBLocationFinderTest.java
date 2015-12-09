@@ -42,7 +42,6 @@ Aalborg lat, long = 57.02 and 9.54
     //List<Notice> foundNotices;
 
     // test data
-    double latMax, latMin, longMax, longMin;
     boolean status;
     Date date;
 
@@ -74,10 +73,10 @@ Aalborg lat, long = 57.02 and 9.54
         minLong = 8
         maxLong = 13
          */
-        latMax = 56.01;
-        latMin = 55.98;
-        longMax = 9.56;
-        longMin = 9.51;
+        float latMax = 56.01F;
+        float latMin = 55.98F;
+        float longMax = 9.56F;
+        float longMin = 9.51F;
         status = true;
 
         status = true;
@@ -95,13 +94,17 @@ Aalborg lat, long = 57.02 and 9.54
         ArrayList<Notice> foundNotices;
 
         //date = new Date();
-        String date = "2015-12-09 11:22:33";
+        String date = "2015-11-09 11:22:30";
+        float latMax = 59.01F;
+        float latMin = 55.98F;
+        float longMax = 9.6F;
+        float longMin = 9.4F;
 
         //Notice testNotice = new Notice();
 
         foundNotices = dbLocationFinder.getNoticesByRadiusAndDate(latMax, latMin, longMax, longMin, date);
 
-        Assert.assertEquals("testName", foundNotices.get(0));
+        Assert.assertEquals("testName", foundNotices.get(0).getName());
     }
 
 

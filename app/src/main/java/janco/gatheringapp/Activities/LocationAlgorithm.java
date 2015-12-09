@@ -45,14 +45,22 @@ public class LocationAlgorithm
         double lonMax;
 
 
-        latVar = radius/31;     // 31 meters per latitude second
-        lonVar = radius/23.72;  // 23.72 meters per longitude second
+        latVar = radius/31/3600;     // 31 meters per latitude second
+        lonVar = radius/23.72/3600;  // 23.72 meters per longitude second
         latMin = latitude-latVar;
         latMax = latitude+latVar;
         lonMin = longitude-lonVar;
         lonMax = longitude+lonVar;
+        Log.e("LatMin:", Double.toString(latMin));
+        Log.e("LatMax:", Double.toString(latMax));
+        Log.e("LonMin:", Double.toString(lonMin));
+        Log.e("LonMax:", Double.toString(lonMax));
+        float latMinFloat = (float) latMin;
+        float latMaxFloat = (float) latMax;
+        float lonMinFloat = (float) lonMin;
+        float lonMaxFloat = (float) lonMax;
 
-        listOfNoticesInRadius.addAll(locationQuery.getNoticesByRadiusAndDate(latMin, lonMin, latMax, lonMax, date));
+        listOfNoticesInRadius.addAll(locationQuery.getNoticesByRadiusAndDate(latMaxFloat, latMinFloat, lonMaxFloat, lonMinFloat, date));
 
         return listOfNoticesInRadius;
     }
@@ -84,10 +92,6 @@ public class LocationAlgorithm
         latMax = latitude+latVar;
         lonMin = longitude-lonVar;
         lonMax = longitude+lonVar;
-        Log.e("LatMin:", Double.toString(latMin));
-        Log.e("LatMax:", Double.toString(latMax));
-        Log.e("LonMin:", Double.toString(lonMin));
-        Log.e("LonMax:", Double.toString(lonMax));
 
         listOfUsersInRadius.addAll(locationQuery.getUsersByRadiusAndStatus(latMax, latMin, lonMax, lonMin, status));
 

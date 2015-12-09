@@ -48,12 +48,11 @@ public class NoticeOverviewActivity extends AppCompatActivity {
         dateString.append(currentDate.getMinutes()+":");
         dateString.append(currentDate.getSeconds());
         String date = dateString.toString();
-        Date delete = new Date();
 
         radius = 2000;
 
         noticeListView = (ListView) findViewById(R.id.overviewListView);
-        ArrayList<Notice> noticeList = algorithm.boundingBoxCalculationForNotice(userLoggedIn.getLastKnownlatitude(), userLoggedIn.getLastKnownLongitude(), radius, delete);
+        ArrayList<Notice> noticeList = algorithm.boundingBoxCalculationForNotice(userLoggedIn.getLastKnownlatitude(), userLoggedIn.getLastKnownLongitude(), radius, date);
 
         List<Map<String, String>> data = new ArrayList<>();
         for(Notice notice : noticeList)

@@ -33,11 +33,11 @@ public class LocationAlgorithmTest extends AndroidTestCase
     public void testLocationAlgorithmForNotices()
     {
         boolean testSuccess;
-        double mockLatitude = 57.0481705;
-        double mockLongitude = 9.92281909999997;
+        double mockLatitude = 57.02;
+        double mockLongitude = 9.54;
         double mockRadius = 2000;
 
-        String mockDate = "2015-12-09 11:22:33";
+        String mockDate = "2015-11-09 11:22:33";
 
         ArrayList<Notice> testList = algorithm.boundingBoxCalculationForNotice(mockLatitude, mockLongitude, mockRadius, mockDate);
 

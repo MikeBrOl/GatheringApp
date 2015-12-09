@@ -123,28 +123,26 @@ public class DBLocationFinder
     /*
     Find Notices based on radius and date
      */
-    public ArrayList<Notice> getNoticesByRadiusAndDate(double latMax, double latMin, double longMax, double longMin,
+    public ArrayList<Notice> getNoticesByRadiusAndDate(float latMax, float latMin, float longMax, float longMin,
                                                   String date)
     {
-        String dateString = date;
         ArrayList<Notice> foundNotices = new ArrayList<>();
         DBConnection dbCon = new DBConnection();
 
         try{
             PreparedStatement statement = dbCon.CONN().prepareStatement
                     ("SELECT * FROM Notices " +
-                            "WHERE Date > ? AND " +
+                            "WHERE Time > ? AND " +
                             "Latitude BETWEEN ? AND ? AND "
                             +"Longitude BETWEEN ? AND ?");
-            statement.setString(1, dateString);
-            statement.setDouble(2, latMin);
-            statement.setDouble(3, latMax);
-            statement.setDouble(4, longMin);
-            statement.setDouble(5, longMax);
+            statement.setString(1, date);
+            statement.setFloat(2, latMin);
+            statement.setFloat(3, latMax);
+            statement.setFloat(4, longMin);
+            statement.setFloat(5, longMax);
 
             ResultSet rs = statement.executeQuery();
 
-            rs.first();
 
             while(rs.next())
             {
@@ -157,10 +155,8 @@ public class DBLocationFinder
                 double longitude = rs.getDouble("Longitude");
                 float conLati = (float) latitude;
                 float conLon = (float) longitude;
-                String dated = "";
-                Notice foundNotice = new Notice(name, description, address, dated, conLati,conLon);
+                Notice foundNotice = new Notice(name, description, address, time, conLati,conLon);
 
-                //Notice foundNotice = new Notice()
 
                 foundNotices.add(foundNotice);
             }
