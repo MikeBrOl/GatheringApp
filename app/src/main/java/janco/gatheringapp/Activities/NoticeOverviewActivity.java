@@ -34,6 +34,7 @@ public class NoticeOverviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_overview);
         algorithm = new LocationAlgorithm();
+        dbUser = new DBUser();
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userLoggedIn = dbUser.getUserByID(mySharedPreferences.getInt("UserID", 0));
 
