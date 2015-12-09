@@ -157,7 +157,7 @@ public class DBLocationFinder
                 double longitude = rs.getDouble("Longitude");
                 float conLati = (float) latitude;
                 float conLon = (float) longitude;
-                Date dated = new Date();
+                String dated = "";
                 Notice foundNotice = new Notice("","","", dated, conLati,conLon);
 
                 foundNotices.add(foundNotice);

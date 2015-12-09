@@ -33,19 +33,19 @@ public class CreateNoticeSelectDateAndTime extends AppCompatActivity {
     {
         DatePicker createNoticeDatePicker = (DatePicker) findViewById(R.id.createNoticeDatePicker);
         TimePicker createNoticeTimerPicker = (TimePicker) findViewById(R.id.createNoticeTimePicker);
-
-        Date selectedDateAndTime = new Date();
-        selectedDateAndTime.setHours(createNoticeTimerPicker.getCurrentHour());
-        selectedDateAndTime.setMinutes(createNoticeTimerPicker.getCurrentMinute());
-        selectedDateAndTime.setYear(createNoticeDatePicker.getYear());
-        selectedDateAndTime.setMonth(createNoticeDatePicker.getMonth());
-        selectedDateAndTime.setDate(createNoticeDatePicker.getDayOfMonth());
+        StringBuilder selectedDateAndTime = new StringBuilder();
+        selectedDateAndTime.append(createNoticeDatePicker.getYear()+"-");
+        selectedDateAndTime.append(createNoticeDatePicker.getMonth()+"-");
+        selectedDateAndTime.append(createNoticeDatePicker.getDayOfMonth()+" ");
+        selectedDateAndTime.append(createNoticeTimerPicker.getCurrentHour()+":");
+        selectedDateAndTime.append(createNoticeTimerPicker.getCurrentMinute()+":00");
 
         Log.e("Selected Date and Time", selectedDateAndTime.toString());
 
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = mySharedPreferences.edit();
         editor.putString("Date", selectedDateAndTime.toString());
+        editor.apply();
         finish();
 
     }

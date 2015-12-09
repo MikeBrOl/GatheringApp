@@ -37,12 +37,10 @@ public class DBNotice
             String name = notice.getName();
             String description = notice.getDescription();
             String address = notice.getAddress();
-            Date time = notice.getTime();
             float lat = notice.getLatitude();
             float lon = notice.getLongitude();
 
-            SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            String date = ft.format(time);
+            String date = notice.getTime();
 
 
 

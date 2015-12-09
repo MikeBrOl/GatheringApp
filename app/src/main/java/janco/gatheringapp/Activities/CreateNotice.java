@@ -3,10 +3,12 @@ package janco.gatheringapp.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,8 +27,10 @@ import janco.gatheringapp.R;
 public class CreateNotice extends AppCompatActivity {
 
     static final int PICK_DATE_AND_TIME_REQUEST = 1;
-    private Date selectedDate;
     private DBNotice noticeDB;
+    private float latitude;
+    private float longitude;
+    private String provider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,25 +64,32 @@ public class CreateNotice extends AppCompatActivity {
 
         LocationManager locationManager = (LocationManager)
                 getSystemService(Context.LOCATION_SERVICE);
-        checkCallingPermission(LOCATION_SERVICE);
+        boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if(!enabled)
+        {
+            Intent startGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(startGps);
+        }
 
         //TODO Change how gps coordinates are aqquired
-        float latitude = (float) locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
-        float longitude = (float) locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
+
+        checkCallingPermission(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        provider = locationManager.getBestProvider(criteria, false);
+        Location location = locationManager.getLastKnownLocation(provider);
+        if(location != null) {
+            onLocationChanged(location);
+        }
+        else
+        {
+            Toast locationNotAvailable = Toast.makeText(this, R.string.locationNotAvailable, Toast.LENGTH_SHORT);
+            locationNotAvailable.show();
+        }
 
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String selectedDateString = mySharedPreferences.getString("Date", "");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        try
-        {
-            selectedDate = dateFormat.parse(selectedDateString);
-        }
-        catch (ParseException dateParingException)
-        {
-            Log.e("Date Parsing Failed", dateParingException.toString());
-        }
 
-        Notice newNotice = new Notice(noticeNameString, noticeDescriptionString, noticeAddressString, selectedDate, latitude, longitude);
+        Notice newNotice = new Notice(noticeNameString, noticeDescriptionString, noticeAddressString, selectedDateString, latitude, longitude);
 
         if (!noticeNameString.equals("")) {
             int success = noticeDB.insertNotice(newNotice);
@@ -101,6 +112,12 @@ public class CreateNotice extends AppCompatActivity {
         Intent selectTimeAndDate = new Intent(this, CreateNoticeSelectDateAndTime.class);
         startActivityForResult(selectTimeAndDate, PICK_DATE_AND_TIME_REQUEST);
 
+    }
+
+    public void onLocationChanged(Location location)
+    {
+        latitude = (float) location.getLatitude();
+        longitude = (float) location.getLongitude();
     }
 }
 

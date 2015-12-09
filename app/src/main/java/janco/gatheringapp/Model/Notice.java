@@ -11,13 +11,13 @@ public class Notice
     String name;
     String description;
     String address;
-    Date time;
+    String time;
     float latitude;
     float longitude;
 
     public Notice() {}
 
-    public Notice(String name, String description, String address, Date time,
+    public Notice(String name, String description, String address, String time,
                   float latitude, float longitude)
     {
         this.name = name;
@@ -52,11 +52,11 @@ public class Notice
         this.address = address;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
