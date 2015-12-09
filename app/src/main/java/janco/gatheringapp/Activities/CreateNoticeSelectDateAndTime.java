@@ -35,7 +35,7 @@ public class CreateNoticeSelectDateAndTime extends AppCompatActivity {
         TimePicker createNoticeTimerPicker = (TimePicker) findViewById(R.id.createNoticeTimePicker);
         StringBuilder selectedDateAndTime = new StringBuilder();
         selectedDateAndTime.append(createNoticeDatePicker.getYear()+"-");
-        selectedDateAndTime.append(createNoticeDatePicker.getMonth()+"-");
+        selectedDateAndTime.append((createNoticeDatePicker.getMonth()+1)+"-");
         selectedDateAndTime.append(createNoticeDatePicker.getDayOfMonth()+" ");
         selectedDateAndTime.append(createNoticeTimerPicker.getCurrentHour()+":");
         selectedDateAndTime.append(createNoticeTimerPicker.getCurrentMinute()+":00");
