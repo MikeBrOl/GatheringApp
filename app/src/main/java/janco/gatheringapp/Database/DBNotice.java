@@ -100,4 +100,28 @@ public class DBNotice
     }
 
 
+    public Notice getNoticeByName(String name)
+    {
+        Notice notice = new Notice();
+
+        try
+        {
+            Connection con = dbConnection.CONN();
+
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Notices WHERE Name = ?");
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+
+        }
+        catch (Exception e)
+        {
+            Log.e("ERROR", e.getMessage());
+        }
+
+        return notice;
+    }
+
+
 }

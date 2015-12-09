@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import janco.gatheringapp.Model.Notice;
 import janco.gatheringapp.Model.User;
 
 /**

@@ -53,5 +53,13 @@ public class DBNoticeTest extends AndroidTestCase
         Assert.assertEquals(1, dbNotice.deleteNotice(notice));
     }
 
+    //Database must contain a notice with the name test before the test can be run
+    public void testGetNoticeByName()
+    {
+        Notice notice = dbNotice.getNoticeByName("Test");
+
+        Assert.assertEquals("Test", notice.getName());
+    }
+
 
 }
