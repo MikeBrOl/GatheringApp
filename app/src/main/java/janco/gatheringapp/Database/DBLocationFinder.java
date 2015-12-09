@@ -124,16 +124,16 @@ public class DBLocationFinder
     Find Notices based on radius and date
      */
     public ArrayList<Notice> getNoticesByRadiusAndDate(double latMax, double latMin, double longMax, double longMin,
-                                                  Date date)
+                                                  String date)
     {
-        String dateString = date.toString();
+        String dateString = date;
         ArrayList<Notice> foundNotices = new ArrayList<>();
         DBConnection dbCon = new DBConnection();
 
         try{
             PreparedStatement statement = dbCon.CONN().prepareStatement
                     ("SELECT * FROM Notices " +
-                            "WHERE date = ? AND " +
+                            "WHERE Date > ? AND " +
                             "Latitude BETWEEN ? AND ? AND "
                             +"Longitude BETWEEN ? AND ?");
             statement.setString(1, dateString);
@@ -149,10 +149,10 @@ public class DBLocationFinder
             while(rs.next())
             {
                 //navn, beskrivelse, billede, addresse, tidspunkt, lokation
-                String navn = rs.getString("Navn");
-                String beskrivelse = rs.getString("Beskrivelse");
-                String addresse = rs.getString("Addresse");
-                String tidspunkt = rs.getString("Tidspunkt");
+                String navn = rs.getString("Name");
+                String beskrivelse = rs.getString("Description");
+                String addresse = rs.getString("Address");
+                String tidspunkt = rs.getString("Time");
                 double latitude = rs.getDouble("Latitude");
                 double longitude = rs.getDouble("Longitude");
                 float conLati = (float) latitude;

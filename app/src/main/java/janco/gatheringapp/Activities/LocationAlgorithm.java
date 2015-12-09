@@ -34,7 +34,7 @@ public class LocationAlgorithm
      * @return ArrayList<Notice> with all available notices within the given radius based of the
      *         latitude and longitude of the current position
      */
-    public ArrayList<Notice> boundingBoxCalculationForNotice(double latitude, double longitude, double radius, Date date)
+    public ArrayList<Notice> boundingBoxCalculationForNotice(double latitude, double longitude, double radius, String date)
     {
         ArrayList<Notice> listOfNoticesInRadius = new ArrayList<>();
         double latVar;

@@ -23,7 +23,7 @@ public class DBNoticeTest extends AndroidTestCase
     //Database must not contain a notice with name insertTest, when the test is run.
     public void testInsertNoticeTest()
     {
-        Date time = new Date();
+        String time = "2015-12-09 11:22:33";
 
         double lat = 57.02;
         float latFloat = (float) lat;
@@ -39,7 +39,8 @@ public class DBNoticeTest extends AndroidTestCase
     //Notice with name deleteTest, has to be in the database before the test can be run.
     public void testDeleteNoticeTest()
     {
-        Date time = new Date();
+        //Date time = new Date();
+        String time = "2015-12-09 11:22:33";
 
         double lat = 57.02;
         float latFloat = (float) lat;

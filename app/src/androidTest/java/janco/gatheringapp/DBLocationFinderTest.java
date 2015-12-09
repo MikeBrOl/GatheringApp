@@ -94,7 +94,8 @@ Aalborg lat, long = 57.02 and 9.54
     {
         ArrayList<Notice> foundNotices;
 
-        date = new Date();
+        //date = new Date();
+        String date = "2015-12-09 11:22:33";
 
         //Notice testNotice = new Notice();
 

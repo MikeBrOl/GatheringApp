@@ -15,7 +15,10 @@ public class Notice
     float latitude;
     float longitude;
 
-    public Notice() {}
+    public Notice()
+    {
+
+    }
 
     public Notice(String name, String description, String address, String time,
                   float latitude, float longitude)

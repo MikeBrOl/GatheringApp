@@ -17,6 +17,8 @@ import janco.gatheringapp.Model.User;
  */
 public class LocationAlgorithmTest extends AndroidTestCase
 {
+    boolean testSuccess;
+
     private LocationAlgorithm algorithm;
     public LocationAlgorithmTest(){
         this.algorithm = new LocationAlgorithm();
@@ -33,7 +35,9 @@ public class LocationAlgorithmTest extends AndroidTestCase
         double mockLatitude = 57.0481705;
         double mockLongitude = 9.92281909999997;
         double mockRadius = 2000;
-        Date mockDate = new Date();
+
+        String mockDate = "2015-12-09 11:22:33";
+
         ArrayList<Notice> testList = algorithm.boundingBoxCalculationForNotice(mockLatitude, mockLongitude, mockRadius, mockDate);
 
         if(testList.size() > 0)
@@ -45,11 +49,11 @@ public class LocationAlgorithmTest extends AndroidTestCase
             testSuccess = false;
         }
         Assert.assertEquals(true, testSuccess);
+
     }
 
     public void testLocationAlgorithmForUsers()
     {
-        boolean testSuccess;
         double mockLatitude = 56;
         double mockLongitude = 9.54;
         double mockRadius = 2000;
