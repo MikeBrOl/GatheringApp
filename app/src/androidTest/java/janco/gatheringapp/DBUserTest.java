@@ -67,4 +67,12 @@ public class DBUserTest extends AndroidTestCase
 
         Assert.assertEquals(true, status);
     }
+
+    //User with ID 1 and username Test has to be in the database before this test can be run
+    public void testGetUserByID()
+    {
+        User user = userDB.getUserByID(1);
+
+        Assert.assertEquals("Test", user.getName());
+    }
 }

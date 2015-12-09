@@ -288,4 +288,53 @@ public class DBUser
 
         return check;
     }
+
+    public User getUserByID(int ID)
+    {
+        User user = new User();
+
+        try
+        {
+            Connection con = dbConnection.CONN();
+
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Users WHERE ID = ?");
+            stmt.setInt(1, ID);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            float dbLatitude = rs.getFloat("Latitude");
+            float dbLongitude = rs.getFloat("Longitude");
+
+            double latitude = (double) dbLatitude;
+            double longitude = (double) dbLongitude;
+
+            boolean ss;
+
+            if(rs.getInt("SearchStatus") == 1)
+            {
+                ss = true;
+            }
+            else
+            {
+                ss = false;
+            }
+
+            user.setName(rs.getString("Name"));
+            user.setUsername(rs.getString("UserName"));
+            user.setPassword(rs.getString("Password"));
+            user.setEmail(rs.getString("Email"));
+            user.setLastKnownlatitude(latitude);
+            user.setLastKnownLongitude(longitude);
+            user.setSearchStatus(ss);
+
+            rs.close();
+        }
+        catch (Exception e)
+        {
+            Log.e("ERROR", e.getMessage());
+        }
+
+        return user;
+
+    }
 }
