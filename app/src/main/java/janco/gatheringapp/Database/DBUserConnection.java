@@ -3,6 +3,8 @@ package janco.gatheringapp.Database;
 import android.util.Log;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -16,10 +18,12 @@ import janco.gatheringapp.Model.UserConnection;
 public class DBUserConnection
 {
     private DBConnection dbConnection;
+    private DBUser dbUser;
 
      public DBUserConnection()
     {
         this.dbConnection = new DBConnection();
+        this.dbUser = new DBUser();
     }
 
 
@@ -69,7 +73,39 @@ public class DBUserConnection
     {
         int check = 0;
 
+        Connection con = dbConnection.CONN();
 
+        try
+        {
+            int UserID1 = userConnection.getAppUser().getID();
+            int UserID2 = userConnection.getConnectedUser().getID();
+
+            PreparedStatement statement = con.prepareStatement
+                    ("DELETE FROM Connection WHERE UserID1 = ? AND UserID2 = ?");
+
+            statement.setInt(1, UserID1);
+            statement.setInt(2, UserID2);
+
+            check = statement.executeUpdate();
+
+        }
+        catch (Exception e)
+        {
+            Log.e("Error", e.getMessage());
+
+            if(con != null)
+            {
+                try
+                {
+                    System.err.print("Transaction is being rolled back");
+                    con.rollback();
+                }
+                catch (SQLException sqle)
+                {
+                    Log.e("Error", sqle.getMessage());
+                }
+            }
+        }
 
         return check;
     }
@@ -78,28 +114,50 @@ public class DBUserConnection
     {
         ArrayList<UserConnection> foundUserConnections = null;
 
+        Connection con = dbConnection.CONN();
+
+        try
+        {
+            int userID1 = appUser.getID();
+
+            PreparedStatement statement = con.prepareStatement
+                    ("SELECT FROM Connection WHERE UserID1 = ?");
+
+            statement.setInt(1, userID1);
+
+            ResultSet rs = statement.executeQuery();
+
+            while(rs.next())
+            {
+                int userID2 = rs.getInt("UserID2");
+                User connectedUser = dbUser.getUserByID(userID2);
+                UserConnection userConnection = new UserConnection(appUser, connectedUser);
+
+                foundUserConnections.add(userConnection);
+            }
+
+        }
+        catch (Exception e)
+        {
+            Log.e("Error", e.getMessage());
+
+            if(con != null)
+            {
+                try
+                {
+                    System.err.print("Transaction is being rolled back");
+                    con.rollback();
+                }
+                catch (SQLException sqle)
+                {
+                    Log.e("Error", sqle.getMessage());
+                }
+            }
+        }
+
 
 
         return foundUserConnections;
     }
-
-//    private boolean checkForExistingUserConnection(User appUser, User connectedUser)
-//    {
-//        Connection con = dbConnection.CONN();
-//
-////        IF EXISTS (SELECT * FROM Table1 WHERE Column1='SomeValue')
-////        UPDATE Table1 SET (...) WHERE Column1='SomeValue'
-////        ELSE
-////        INSERT INTO Table1 VALUES (...)
-//
-//        // get users' IDS
-//        int appUserID = appUser.getID();
-//        int connectedUserID = connectedUser.getID();
-//
-//        Statement statement = con.prepareStatement()
-//
-//
-//        return false;
-//    }
 
 }
