@@ -90,4 +90,10 @@ public class NoticeOverviewActivity extends AppCompatActivity {
         Intent goTo = new Intent(this, CreateNotice.class);
         startActivity(goTo);
     }
+
+    public void goToUserConnection(View view)
+    {
+        Intent goTO = new Intent(this, UserConnectionActivity.class);
+        startActivity(goTO);
+    }
 }

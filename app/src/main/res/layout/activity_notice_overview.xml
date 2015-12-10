@@ -35,5 +35,6 @@
         android:text="@string/overviewUserConnectionButton"
         android:layout_alignTop="@+id/overviewCreateNotice"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="goToUserConnection"/>
 </RelativeLayout>

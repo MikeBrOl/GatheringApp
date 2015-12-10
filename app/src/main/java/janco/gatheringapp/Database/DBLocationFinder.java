@@ -106,7 +106,7 @@ public class DBLocationFinder
                 // generate new user from found resultset
                 User foundUser = new User(username, name, password, email, latitude, longitude, newUserStatus);
                 Log.e("User Email", foundUser.getEmail());
-
+                foundUser.setID(rs.getInt("ID"));
                 foundUsers.add(foundUser);
             }
             rs.close();

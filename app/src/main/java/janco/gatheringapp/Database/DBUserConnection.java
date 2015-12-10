@@ -46,14 +46,14 @@ public class DBUserConnection
             Statement statement = con.createStatement();
             String query = "IF NOT EXISTS (SELECT * FROM Connection " +
                     "WHERE UserID1 = " + appUserID + " AND UserID2 = " + connectedUserID + " OR " +
-                    "WHERE UserID1 = " + connectedUserID + "AND UserID2 = " + appUserID + ")" +
+                    " UserID1 = " + connectedUserID + " AND UserID2 = " + appUserID + ")" +
                     "INSERT INTO Connection " +
                      "VALUES (" + appUserID + ","
                       + connectedUserID + ");";
 
                 Log.e("Query: ", query);
 
-            check = statement.executeUpdate(query);;
+            check = statement.executeUpdate(query);
 
         }
 
