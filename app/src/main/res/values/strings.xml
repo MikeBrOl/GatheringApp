@@ -28,4 +28,8 @@
     //OverviewNoticeActivity strings
     <string name="overviewCreateNoticeButton">Opret Opslag</string>
     <string name="overviewUserConnectionButton">Find Brugerer</string>
+    //UserConnectionActivity strings
+    <string name="UserConnectionActivityButtontext">Tilbage</string>
+    <string name="UserConnectionActivitySwitchText">Søge status</string>
+    <string name="ConnectionErrorToast">Forbindelsen fejlede</string>
 </resources>
