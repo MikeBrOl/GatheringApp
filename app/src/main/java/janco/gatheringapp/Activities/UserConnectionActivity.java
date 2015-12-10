@@ -45,6 +45,7 @@ public class UserConnectionActivity extends AppCompatActivity {
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         userLoggedIn = dbUser.getUserByID(mySharedPreferences.getInt("UserID", 0));
         status = (Switch) findViewById(R.id.UserConnectionActivitySearchStatus);
+        status.setChecked(userLoggedIn.isSearchStatus());
 
         radius = 10000;
 
@@ -61,12 +62,13 @@ public class UserConnectionActivity extends AppCompatActivity {
                     List<Map<String, String>> data = new ArrayList();
                     for (User user : userList)
                     {
-                        Map<String, String> datum = new HashMap<>(1);
+                        Map<String, String> datum = new HashMap<>(2);
                         datum.put("Username", user.getUsername());
+                        datum.put("Name", user.getName());
                         data.add(datum);
                     }
 
-                    SimpleAdapter adapter = new SimpleAdapter(getApplicationContext(), data, android.R.layout.simple_expandable_list_item_2, new String [] {"Username"}, new int[] {android.R.id.text2});
+                    SimpleAdapter adapter = new SimpleAdapter(UserConnectionActivity.this, data, android.R.layout.simple_expandable_list_item_2, new String [] {"Username", "Name"}, new int[] {android.R.id.text1, android.R.id.text2});
                     userListView.setAdapter(adapter);
                     userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
