@@ -51,7 +51,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
             user.setEmail(emailString);
             check = dbUser.insertUser(user);
 
-            if(!encryptedPassword.equals(passwordAgainString))
+            if(!passwordString.equals(passwordAgainString))
             {
                 Toast passwordDontMatch = Toast.makeText(this, R.string.passwordFailed, Toast.LENGTH_SHORT);
                 passwordDontMatch.show();
