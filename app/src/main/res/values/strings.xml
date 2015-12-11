@@ -13,6 +13,7 @@
     <string name="newNameInputHint">Navn</string>
     <string name="newUserNameInputHint">Bruger Navn</string>
     <string name="createUserFailed">Brugeren Blev Ikke Oprettet. Bruger Navnet Findes Allerrede</string>
+    <string name="passwordFailed">De To Passwords Stemmer Ikke Overens</string>
     //CreateNoticeActivity strings
     <string name="createNoticeNameHint">Navn</string>
     <string name="createNoticeDescriptionHint">Beskrivelse</string>

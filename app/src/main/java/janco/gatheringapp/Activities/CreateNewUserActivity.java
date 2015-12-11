@@ -33,6 +33,8 @@ public class CreateNewUserActivity extends AppCompatActivity {
         String nameString = newName.getText().toString();
         String passwordString = newPassword.getText().toString();
         String emailString = newEmail.getText().toString();
+        EditText newPasswordAgain = (EditText) findViewById(R.id.newPasswordInputAgain);
+        String passwordAgainString = newPasswordAgain.getText().toString();
 
         BasicPasswordEncryptor bpe = new BasicPasswordEncryptor();
         String encryptedPassword = bpe.encryptPassword(passwordString);
@@ -49,16 +51,20 @@ public class CreateNewUserActivity extends AppCompatActivity {
             user.setEmail(emailString);
             check = dbUser.insertUser(user);
 
-            if(check == 1)
+            if(!encryptedPassword.equals(passwordAgainString))
             {
-                //TODO Add toast for success
-                Intent login = new Intent(this, LoginActivity.class);
-                startActivity(login);
+                Toast passwordDontMatch = Toast.makeText(this, R.string.passwordFailed, Toast.LENGTH_SHORT);
+                passwordDontMatch.show();
             }
-            else
-            {
-                Toast failedToCreate = Toast.makeText(this,R.string.createUserFailed,Toast.LENGTH_SHORT);
-                failedToCreate.show();
+            else {
+                if (check == 1) {
+                    //TODO Add toast for success
+                    Intent login = new Intent(this, LoginActivity.class);
+                    startActivity(login);
+                } else {
+                    Toast failedToCreate = Toast.makeText(this, R.string.createUserFailed, Toast.LENGTH_SHORT);
+                    failedToCreate.show();
+                }
             }
         }
         catch(Exception e)
