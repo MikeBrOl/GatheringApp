@@ -112,18 +112,20 @@ public class DBUserConnection
 
     public ArrayList<UserConnection> getUserConnectionsByAppUser(User appUser)
     {
-        ArrayList<UserConnection> foundUserConnections = null;
+        ArrayList<UserConnection> foundUserConnections = new ArrayList<>();
 
         Connection con = dbConnection.CONN();
 
         try
         {
             int userID1 = appUser.getID();
+            //appUser = dbUser.getUserByID(userID1);
 
             PreparedStatement statement = con.prepareStatement
-                    ("SELECT FROM Connection WHERE UserID1 = ?");
+                    ("SELECT * FROM Connection WHERE UserID1 = ? or UserID2= ?");
 
             statement.setInt(1, userID1);
+            statement.setInt(2, userID1);
 
             ResultSet rs = statement.executeQuery();
 
@@ -158,6 +160,44 @@ public class DBUserConnection
 
 
         return foundUserConnections;
+    }
+
+    public UserConnection checkForExistingUserConnection(User appUser, User connectedUser)
+    {
+        UserConnection userConnection = new UserConnection();
+
+        try
+        {
+            Connection con = dbConnection.CONN();
+
+
+            // get the two users' IDs
+            int appUserID = appUser.getID();
+            int connectedUserID = connectedUser.getID();
+
+            Statement statement = con.createStatement();
+            String query = "SELECT * FROM Connection " +
+                    "WHERE UserID1 = " + appUserID + " AND UserID2 = " + connectedUserID + " OR " +
+                    " UserID1 = " + connectedUserID + " AND UserID2 = " + appUserID;
+
+            Log.e("Query: ", query);
+            ResultSet rs = statement.executeQuery(query);
+            rs.next();
+            User userApp = dbUser.getUserByID(rs.getInt("UserID1"));
+            User userConnected = dbUser.getUserByID(rs.getInt("UserID2"));
+            userConnection.setAppUser(userApp);
+            userConnection.setConnectedUser(userConnected);
+            Log.e("UserConnection", Integer.toString(userConnection.getAppUser().getID()));
+
+        }
+
+        catch (SQLException sqle)
+        {
+            sqle.getStackTrace();
+        }
+
+
+        return userConnection;
     }
 
 }

@@ -6,6 +6,7 @@ import android.util.Log;
 import junit.framework.Assert;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import janco.gatheringapp.Database.DBUser;
 import janco.gatheringapp.Database.DBUserConnection;
@@ -47,7 +48,7 @@ public class DBUserConnectionTest extends AndroidTestCase
 
         int success = dbUserConnection.insertUserConnection(testUserConnection);
 
-        Assert.assertEquals(1, success );
+        Assert.assertEquals(1, success);
 
     }
 
@@ -64,9 +65,28 @@ public class DBUserConnectionTest extends AndroidTestCase
 
     public void testGetUserConnectionsByAppUser()
     {
-        //User appUser = dbUser.getUserByUsername("test Username");
-        //ArrayList<UserConnection> appUserUserConnections= dbUserConnection.getUserConnectionsByAppUser(appUser);
+        User appUser = dbUser.getUserByUsername("testUsername");
+        ArrayList<UserConnection> appUserConnections = dbUserConnection.getUserConnectionsByAppUser(appUser);
 
-        //Assert.assertNotNull("Arraylist for found user connections: ", appUserUserConnections);
+        boolean status;
+        if(appUserConnections.size() > 0) {
+            status = true;
+        }
+        else
+        {
+            status = false;
+        }
+
+
+        Assert.assertEquals(true, status);
+    }
+
+    public void testCheckForExistingUserConnection()
+    {
+        User appUser = dbUser.getUserByID(35);
+        User connectedUser = dbUser.getUserByID(34);
+        UserConnection reverseConnection = dbUserConnection.checkForExistingUserConnection(appUser,connectedUser);
+
+        Assert.assertEquals(34, reverseConnection.getAppUser().getID());
     }
 }
