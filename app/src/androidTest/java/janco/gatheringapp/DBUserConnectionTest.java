@@ -6,6 +6,7 @@ import android.util.Log;
 import junit.framework.Assert;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import janco.gatheringapp.Database.DBUser;
 import janco.gatheringapp.Database.DBUserConnection;
@@ -64,10 +65,14 @@ public class DBUserConnectionTest extends AndroidTestCase
 
     public void testGetUserConnectionsByAppUser()
     {
-        //User appUser = dbUser.getUserByUsername("test Username");
-        //ArrayList<UserConnection> appUserUserConnections= dbUserConnection.getUserConnectionsByAppUser(appUser);
+        User appUser = dbUser.getUserByUsername("testUsername");
+        List<UserConnection> appUserConnections = dbUserConnection.getUserConnectionsByAppUser(appUser);
 
-        //Assert.assertNotNull("Arraylist for found user connections: ", appUserUserConnections);
+        boolean status = false;
+        if(appUserConnections.size()>0)
+            status = true;
+
+        Assert.assertEquals(true, status);
     }
 
     public void testCheckForExistingUserConnection()

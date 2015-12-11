@@ -119,6 +119,7 @@ public class DBUserConnection
         try
         {
             int userID1 = appUser.getID();
+            appUser = dbUser.getUserByID(userID1);
 
             PreparedStatement statement = con.prepareStatement
                     ("SELECT FROM Connection WHERE UserID1 = ?");

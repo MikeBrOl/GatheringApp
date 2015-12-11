@@ -31,6 +31,23 @@
         android:layout_alignParentEnd="true"
         android:onClick="selectedDateAndTime"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/createNoticeTimePickerLbl"
+        android:id="@+id/createNoticeTimePickerLbl"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/createNoticeTimePicker"
+        android:timePickerMode="spinner"
+        android:layout_below="@+id/createNoticeTimePickerLbl"
+        android:layout_centerHorizontal="true" />
+
     <DatePicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,13 +56,5 @@
         android:calendarViewShown="false"
         android:layout_above="@+id/createNoticeReturnButton"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/createNoticeTimePicker"/>
-
-    <TimePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/createNoticeTimePicker"
-        android:timePickerMode="spinner"
-        android:layout_alignRight="@+id/createNoticeDatePicker"
-        android:layout_alignEnd="@+id/createNoticeDatePicker" />
+        />
 </RelativeLayout>
