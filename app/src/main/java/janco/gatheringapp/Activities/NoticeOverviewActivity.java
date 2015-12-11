@@ -47,7 +47,7 @@ public class NoticeOverviewActivity extends AppCompatActivity {
         dateString.append(currentDate.get(Calendar.YEAR)+"-");
         dateString.append((currentDate.get(Calendar.MONTH)+1)+"-");
         dateString.append(currentDate.get(Calendar.DAY_OF_MONTH)+" ");
-        dateString.append(currentDate.get(Calendar.HOUR)+":");
+        dateString.append(currentDate.get(Calendar.HOUR_OF_DAY)+":");
         dateString.append(currentDate.get(Calendar.MINUTE)+":");
         dateString.append(currentDate.get(Calendar.SECOND));
         String date = dateString.toString();

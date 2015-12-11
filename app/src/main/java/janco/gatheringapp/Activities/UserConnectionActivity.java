@@ -90,9 +90,9 @@ public class UserConnectionActivity extends AppCompatActivity {
 
                                     if(dbUserConnection.insertUserConnection(userConnection)==0)
                                     {
-//                                        UserConnection alternativeUserConnection = checkForExistingUserConnection(userConnection.getAppUser(), userConnection.getConnectedUser());
-//                                        messageTableName = alternativeUserConnection.getAppUser().getUsername()+
-//                                                alternativeUserConnection.getConnectedUser().getUsername();
+                                        UserConnection alternativeUserConnection = dbUserConnection.checkForExistingUserConnection(userConnection.getAppUser(), userConnection.getConnectedUser());
+                                        messageTableName = alternativeUserConnection.getAppUser().getUsername()+
+                                                alternativeUserConnection.getConnectedUser().getUsername();
                                     }
                                     else
                                     {

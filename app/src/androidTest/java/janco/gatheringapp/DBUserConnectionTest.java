@@ -47,7 +47,7 @@ public class DBUserConnectionTest extends AndroidTestCase
 
         int success = dbUserConnection.insertUserConnection(testUserConnection);
 
-        Assert.assertEquals(1, success );
+        Assert.assertEquals(1, success);
 
     }
 
@@ -68,5 +68,14 @@ public class DBUserConnectionTest extends AndroidTestCase
         //ArrayList<UserConnection> appUserUserConnections= dbUserConnection.getUserConnectionsByAppUser(appUser);
 
         //Assert.assertNotNull("Arraylist for found user connections: ", appUserUserConnections);
+    }
+
+    public void testCheckForExistingUserConnection()
+    {
+        User appUser = dbUser.getUserByID(35);
+        User connectedUser = dbUser.getUserByID(34);
+        UserConnection reverseConnection = dbUserConnection.checkForExistingUserConnection(appUser,connectedUser);
+
+        Assert.assertEquals(34, reverseConnection.getAppUser().getID());
     }
 }
