@@ -66,11 +66,17 @@ public class DBUserConnectionTest extends AndroidTestCase
     public void testGetUserConnectionsByAppUser()
     {
         User appUser = dbUser.getUserByUsername("testUsername");
-        List<UserConnection> appUserConnections = dbUserConnection.getUserConnectionsByAppUser(appUser);
+        ArrayList<UserConnection> appUserConnections = dbUserConnection.getUserConnectionsByAppUser(appUser);
 
-        boolean status = false;
-        if(appUserConnections.size()>0)
+        boolean status;
+        if(appUserConnections.size() > 0) {
             status = true;
+        }
+        else
+        {
+            status = false;
+        }
+
 
         Assert.assertEquals(true, status);
     }

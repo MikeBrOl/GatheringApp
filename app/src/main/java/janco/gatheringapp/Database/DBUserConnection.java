@@ -112,19 +112,20 @@ public class DBUserConnection
 
     public ArrayList<UserConnection> getUserConnectionsByAppUser(User appUser)
     {
-        ArrayList<UserConnection> foundUserConnections = null;
+        ArrayList<UserConnection> foundUserConnections = new ArrayList<>();
 
         Connection con = dbConnection.CONN();
 
         try
         {
             int userID1 = appUser.getID();
-            appUser = dbUser.getUserByID(userID1);
+            //appUser = dbUser.getUserByID(userID1);
 
             PreparedStatement statement = con.prepareStatement
-                    ("SELECT FROM Connection WHERE UserID1 = ?");
+                    ("SELECT * FROM Connection WHERE UserID1 = ? or UserID2= ?");
 
             statement.setInt(1, userID1);
+            statement.setInt(2, userID1);
 
             ResultSet rs = statement.executeQuery();
 
