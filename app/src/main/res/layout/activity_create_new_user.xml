@@ -43,7 +43,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="140dp"
         android:hint="@string/newPasswordInputHint"
-        />
+        android:password="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -51,11 +51,10 @@
         android:text=""
         android:ems="10"
         android:id="@+id/newEmailInput"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp"
         android:hint="@string/newEmailInputHint"
-        />
+        android:layout_below="@+id/newPasswordInputAgain"
+        android:layout_alignLeft="@+id/newPasswordInputAgain"
+        android:layout_alignStart="@+id/newPasswordInputAgain" />
 
     <Button
         android:layout_width="wrap_content"
@@ -66,4 +65,15 @@
         android:layout_centerHorizontal="true"
         android:onClick="createNewUser"
         />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:ems="10"
+        android:id="@+id/newPasswordInputAgain"
+        android:hint="@string/newPasswordInputHint"
+        android:layout_below="@+id/newPasswordInput"
+        android:layout_centerHorizontal="true"
+        android:password="true" />
 </RelativeLayout>
