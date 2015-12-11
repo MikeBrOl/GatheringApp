@@ -18,13 +18,14 @@
         android:id="@+id/createNoticeName"
         android:layout_above="@+id/createNoticeDescription"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="42dp" />
+        android:layout_marginBottom="42dp"
+        android:singleLine="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=""
+        android:inputType="textMultiLine"
         android:hint="@string/createNoticeDescriptionHint"
         android:id="@+id/createNoticeDescription"
         android:layout_above="@+id/createNoticeAddress"
@@ -40,7 +41,8 @@
         android:id="@+id/createNoticeAddress"
         android:layout_centerVertical="true"
         android:layout_alignRight="@+id/createNoticeButton"
-        android:layout_alignEnd="@+id/createNoticeButton" />
+        android:layout_alignEnd="@+id/createNoticeButton"
+        android:singleLine="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -62,5 +64,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
         android:onClick="selectDateAndTime"/>
+
 
 </RelativeLayout>
