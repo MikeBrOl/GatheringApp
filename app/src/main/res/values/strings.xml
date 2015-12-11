@@ -25,6 +25,8 @@
     <string name="createNoticeNotSuccess">Navnet skal være unikt</string>
     <string name="createNoticeNameCantBeEmpty">Navne feltet skal være udfyldt</string>
     <string name="locationNotAvailable">Gps er ikke tilgængelig</string>
+    <string name="createNoticeTimePickerLbl">Tid og dato</string>
+    <string name="createNoticeDatePickerLbl">Dato</string>
     //OverviewNoticeActivity strings
     <string name="overviewCreateNoticeButton">Opret Opslag</string>
     <string name="overviewUserConnectionButton">Find Brugerer</string>
