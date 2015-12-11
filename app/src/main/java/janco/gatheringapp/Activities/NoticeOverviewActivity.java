@@ -67,7 +67,7 @@ public class NoticeOverviewActivity extends AppCompatActivity {
             data.add(datum);
         }
 
-        SimpleAdapter adapter = new SimpleAdapter(this, data,
+        SimpleAdapter adapter = new SimpleAdapter(NoticeOverviewActivity.this, data,
                 android.R.layout.simple_expandable_list_item_2,
                 new String [] {"name", "date"},
                 new int[] {android.R.id.text1, android.R.id.text2});
