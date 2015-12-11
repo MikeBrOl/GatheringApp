@@ -56,7 +56,7 @@ public class NoticeOverviewActivity extends AppCompatActivity {
         radius = 2000;
 
         noticeListView = (ListView) findViewById(R.id.overviewListView);
-        ArrayList<Notice> noticeList = algorithm.boundingBoxCalculationForNotice(userLoggedIn.getLastKnownlatitude(), userLoggedIn.getLastKnownLongitude(), radius, date);
+        final ArrayList<Notice> noticeList = algorithm.boundingBoxCalculationForNotice(userLoggedIn.getLastKnownlatitude(), userLoggedIn.getLastKnownLongitude(), radius, date);
 
         List<Map<String, String>> data = new ArrayList<>();
         for(Notice notice : noticeList)
