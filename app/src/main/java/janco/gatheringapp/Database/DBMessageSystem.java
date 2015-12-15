@@ -26,7 +26,7 @@ public class DBMessageSystem
         int check = 1;
         try
         {
-           Statement stmt = con.CONN().createStatement();
+           Statement stmt = dbConnection.CONN().createStatement();
             String query = "IF EXISTS(SELECT * FROM dmaa0214_4Sem_Gruppe2.INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = '"+tableName+"')" +
                     "BEGIN PRINT 'Table exists' END ELSE CREATE TABLE "+tableName+"([ID][int]IDENTITY(1,1)NOT NULL PRIMARY KEY, [Message][TEXT]NULL, [Sender][TEXT]NULL)";
             Log.e("Query:",query);
@@ -44,7 +44,6 @@ public class DBMessageSystem
             //Update UserConnection with table name
             //rollback possibility
             stmt.close();
-            con.close();
         }
         catch (SQLException createTableException)
         {
@@ -59,12 +58,11 @@ public class DBMessageSystem
 
         try
         {
-            Statement stmt = con.CONN().createStatement();
+            Statement stmt = dbConnection.CONN().createStatement();
             String query = "INSERT INTO "+tableName+"(Message, Sender) Values('"+message+"', '"+userName+"')";
             check = stmt.executeUpdate(query);
 
             stmt.close();
-            con.close();
         }
         catch(SQLException insertMessageException)
         {
