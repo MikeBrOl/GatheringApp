@@ -1,8 +1,11 @@
 package janco.gatheringapp;
 
 import android.test.AndroidTestCase;
+import android.util.Log;
 
 import junit.framework.Assert;
+
+import java.util.ArrayList;
 
 import janco.gatheringapp.Database.DBMessageSystem;
 import janco.gatheringapp.Database.DBUser;
@@ -32,7 +35,7 @@ public class DBMessageSystemTest extends AndroidTestCase
 
         int check = system.createTable(tableName, userConnection);
 
-        Assert.assertEquals(0,check);
+        Assert.assertEquals(0, check);
     }
 
     public void testInsertMessage()
@@ -44,5 +47,18 @@ public class DBMessageSystemTest extends AndroidTestCase
         int check = system.insertMessage(message, tableName, userName);
 
         Assert.assertEquals(1,check);
+    }
+
+    public void testFindMessagesByUserName()
+    {
+        boolean success = false;
+        String userName = "Kim";
+        ArrayList<String> chats = system.getChatsByUserName(userName);
+        if(chats.size()>0)
+        {
+                    success = true;
+        }
+
+        Assert.assertEquals(true, success);
     }
 }

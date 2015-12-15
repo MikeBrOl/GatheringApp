@@ -2,10 +2,13 @@ package janco.gatheringapp.Database;
 
 import android.util.Log;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import janco.gatheringapp.Model.UserConnection;
 
@@ -69,5 +72,25 @@ public class DBMessageSystem
             Log.e("Error inserting message", insertMessageException.toString());
         }
         return check;
+    }
+
+    public ArrayList<String> getChatsByUserName(String userName)
+    {
+        ArrayList<String> chats = new ArrayList<>();
+        try
+        {
+            Statement stmt = dbConnection.CONN().createStatement();
+            String query = "SELECT * FROM dmaa0214_4Sem_Gruppe2.INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE '%"+userName+"%'";
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next())
+            {
+                chats.add(rs.getString("TABLE_NAME"));
+            }
+        }
+        catch(SQLException chatsByUserName)
+        {
+            Log.e("ChatByUserName", chatsByUserName.getStackTrace().toString());
+        }
+        return chats;
     }
 }
