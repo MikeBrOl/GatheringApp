@@ -35,4 +35,5 @@
     <string name="UserConnectionActivityButtontext">Tilbage</string>
     <string name="UserConnectionActivitySwitchText">Søge status</string>
     <string name="ConnectionErrorToast">Forbindelsen fejlede</string>
+    <string name="ConnectionHistoryButtonText">Historik</string>
 </resources>
