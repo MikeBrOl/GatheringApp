@@ -36,4 +36,6 @@
     <string name="UserConnectionActivitySwitchText">Søge status</string>
     <string name="ConnectionErrorToast">Forbindelsen fejlede</string>
     <string name="ConnectionHistoryButtonText">Historik</string>
+    //MessageOviewActivity
+    <string name="messageSendButton">Send</string>
 </resources>

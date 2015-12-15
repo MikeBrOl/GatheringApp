@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import janco.gatheringapp.Model.UserConnection;
 
@@ -86,11 +87,39 @@ public class DBMessageSystem
             {
                 chats.add(rs.getString("TABLE_NAME"));
             }
+            stmt.close();
+            rs.close();
         }
         catch(SQLException chatsByUserName)
         {
             Log.e("ChatByUserName", chatsByUserName.getStackTrace().toString());
         }
         return chats;
+    }
+
+    public HashMap<String, String> getAllMessages(String tableName)
+    {
+        HashMap<String, String> messages = new HashMap<>(2);
+
+        try
+        {
+            Statement stmt = dbConnection.CONN().createStatement();
+            String query = "SELECT * From "+tableName;
+
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next())
+            {
+                messages.put("UserName", rs.getString("Sender"));
+                messages.put("Message", rs.getString("Message"));
+            }
+            stmt.close();
+            rs.close();
+        }
+        catch(SQLException getAllMessages)
+        {
+            Log.e("GetAllMessages", getAllMessages.toString());
+        }
+
+        return messages;
     }
 }

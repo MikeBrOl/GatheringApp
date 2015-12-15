@@ -6,6 +6,7 @@ import android.util.Log;
 import junit.framework.Assert;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import janco.gatheringapp.Database.DBMessageSystem;
 import janco.gatheringapp.Database.DBUser;
@@ -60,5 +61,18 @@ public class DBMessageSystemTest extends AndroidTestCase
         }
 
         Assert.assertEquals(true, success);
+    }
+
+    public void testGetAllMessage()
+    {
+        boolean succes = false;
+        String tableName = "Kimmie";
+        HashMap<String, String> message = system.getAllMessages(tableName);
+        if(message.size() > 0)
+        {
+            succes = true;
+        }
+
+        Assert.assertEquals(true, succes);
     }
 }
