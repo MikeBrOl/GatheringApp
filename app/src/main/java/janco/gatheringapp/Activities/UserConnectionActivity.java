@@ -131,6 +131,11 @@ public class UserConnectionActivity extends AppCompatActivity {
         finish();
     }
 
+    public void connectionHistory(View view)
+    {
+        Intent userHistory = new Intent(this, UserConnectionHistoryActivity.class);
+        startActivity(userHistory);
+    }
 
 
 

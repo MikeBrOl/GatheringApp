@@ -27,7 +27,8 @@
         <activity android:name=".Activities.CreateNoticeSelectDateAndTime" />
         <activity android:name=".Activities.NoticeView" />
         <activity android:name=".Activities.UserConnectionActivity" />
-        <activity android:name=".Activities.MessageOverviewActivity"></activity>
+        <activity android:name=".Activities.MessageOverviewActivity" />
+        <activity android:name=".Activities.UserConnectionHistoryActivity"></activity>
     </application>
 
 </manifest>
