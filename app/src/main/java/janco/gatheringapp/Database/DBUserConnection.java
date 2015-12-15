@@ -48,11 +48,11 @@ public class DBUserConnection
             int connectedUserID = connectedUser.getID();
 
             Statement statement = con.createStatement();
-            String query = "IF NOT EXISTS (SELECT * FROM Connection " +
+            String query = "IF NOT EXISTS (SELECT * FROM UserConnection " +
                     "WHERE UserID1 = " + appUserID + " AND UserID2 = " + connectedUserID + " OR " +
                     " UserID1 = " + connectedUserID + " AND UserID2 = " + appUserID + ")" +
-                    "INSERT INTO Connection " +
-                     "VALUES (" + appUserID + ","
+                    "INSERT INTO UserConnection " +
+                     "VALUES (null," + appUserID + ","
                       + connectedUserID + ");";
 
                 Log.e("Query: ", query);
@@ -81,7 +81,7 @@ public class DBUserConnection
             int UserID2 = userConnection.getConnectedUser().getID();
 
             PreparedStatement statement = con.prepareStatement
-                    ("DELETE FROM Connection WHERE UserID1 = ? AND UserID2 = ?");
+                    ("DELETE FROM UserConnection WHERE UserID1 = ? AND UserID2 = ?");
 
             statement.setInt(1, UserID1);
             statement.setInt(2, UserID2);
@@ -122,7 +122,7 @@ public class DBUserConnection
             //appUser = dbUser.getUserByID(userID1);
 
             PreparedStatement statement = con.prepareStatement
-                    ("SELECT * FROM Connection WHERE UserID1 = ? or UserID2= ?");
+                    ("SELECT * FROM UserConnection WHERE UserID1 = ? or UserID2= ?");
 
             statement.setInt(1, userID1);
             statement.setInt(2, userID1);
@@ -176,7 +176,7 @@ public class DBUserConnection
             int connectedUserID = connectedUser.getID();
 
             Statement statement = con.createStatement();
-            String query = "SELECT * FROM Connection " +
+            String query = "SELECT * FROM UserConnection " +
                     "WHERE UserID1 = " + appUserID + " AND UserID2 = " + connectedUserID + " OR " +
                     " UserID1 = " + connectedUserID + " AND UserID2 = " + appUserID;
 
@@ -198,6 +198,29 @@ public class DBUserConnection
 
 
         return userConnection;
+    }
+
+    public int updateUserConnection(UserConnection userConnection, String tableName)
+    {
+        int check = 0;
+        try
+        {
+            Connection con = dbConnection.CONN();
+            PreparedStatement stmt = con.prepareStatement("UPDATE UserConnection SET ChatName = ? WHERE UserID1 = ? AND UserID2 = ?");
+            stmt.setString(1, tableName);
+            stmt.setInt(2, userConnection.getAppUser().getID());
+            stmt.setInt(3, userConnection.getConnectedUser().getID());
+
+            check = stmt.executeUpdate();
+
+            stmt.close();
+        }
+        catch(SQLException updateUserConnectionError)
+        {
+            Log.e("Error Connection:", updateUserConnectionError.getStackTrace().toString());
+        }
+
+        return check;
     }
 
 }

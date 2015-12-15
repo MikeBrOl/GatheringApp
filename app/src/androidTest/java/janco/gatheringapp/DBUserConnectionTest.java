@@ -87,6 +87,17 @@ public class DBUserConnectionTest extends AndroidTestCase
         User connectedUser = dbUser.getUserByID(34);
         UserConnection reverseConnection = dbUserConnection.checkForExistingUserConnection(appUser,connectedUser);
 
-        Assert.assertEquals(34, reverseConnection.getAppUser().getID());
+        Assert.assertEquals(35, reverseConnection.getAppUser().getID());
+    }
+
+    public void testUpdateUserConnection()
+    {
+        User appUser = dbUser.getUserByID(35);
+        User connectedUser = dbUser.getUserByID(34);
+        UserConnection userConnection = new UserConnection(appUser,connectedUser);
+        String tableName = "Kimmie";
+        int check = dbUserConnection.updateUserConnection(userConnection, tableName);
+
+        Assert.assertEquals(1, check);
     }
 }
