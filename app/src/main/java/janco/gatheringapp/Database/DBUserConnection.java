@@ -59,6 +59,8 @@ public class DBUserConnection
 
             check = statement.executeUpdate(query);
 
+            statement.close();
+            con.close();
         }
 
         catch (SQLException sqle)
@@ -87,6 +89,8 @@ public class DBUserConnection
             statement.setInt(2, UserID2);
 
             check = statement.executeUpdate();
+            statement.close();
+            con.close();
 
         }
         catch (Exception e)
@@ -106,6 +110,7 @@ public class DBUserConnection
                 }
             }
         }
+
 
         return check;
     }
@@ -137,6 +142,10 @@ public class DBUserConnection
 
                 foundUserConnections.add(userConnection);
             }
+
+            con.close();
+            statement.close();
+            rs.close();
 
         }
         catch (Exception e)
@@ -189,6 +198,9 @@ public class DBUserConnection
             userConnection.setConnectedUser(userConnected);
             Log.e("UserConnection", Integer.toString(userConnection.getAppUser().getID()));
 
+            con.close();
+            statement.close();
+            rs.close();
         }
 
         catch (SQLException sqle)

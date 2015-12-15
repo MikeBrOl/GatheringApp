@@ -22,11 +22,11 @@ public class DBLocationFinder
     //opslags: dato
     //User: status
 
-
+    private DBConnection dbConnection;
 
     public DBLocationFinder()
     {
-
+        this.dbConnection = new DBConnection();
     }
 
     /**
@@ -60,13 +60,14 @@ public class DBLocationFinder
         float longMaxFloat = (float) longMax;
         float longMinFloat = (float) longMin;
 
-        DBConnection dbConnection = new DBConnection();
 
         try {
-            PreparedStatement statement = dbConnection.CONN().prepareStatement
+            Connection con = dbConnection.CONN();
+
+            PreparedStatement statement = con.prepareStatement
                     ("SELECT * FROM Users " +
                             "WHERE Latitude BETWEEN ? AND ? AND " +
-                            "Longitude BETWEEN ? AND ? AND "+
+                            "Longitude BETWEEN ? AND ? AND " +
                             "SearchStatus = ?");
 
             // set parameters for query
@@ -110,6 +111,8 @@ public class DBLocationFinder
                 foundUsers.add(foundUser);
             }
             rs.close();
+            statement.close();
+            con.close();
         }
         catch (SQLException getUserSqlError)
         {
@@ -127,14 +130,15 @@ public class DBLocationFinder
                                                   String date)
     {
         ArrayList<Notice> foundNotices = new ArrayList<>();
-        DBConnection dbCon = new DBConnection();
 
         try{
-            PreparedStatement statement = dbCon.CONN().prepareStatement
+            Connection con = dbConnection.CONN();
+
+            PreparedStatement statement = con.prepareStatement
                     ("SELECT * FROM Notices " +
                             "WHERE Time > ? AND " +
                             "Latitude BETWEEN ? AND ? AND "
-                            +"Longitude BETWEEN ? AND ?");
+                            + "Longitude BETWEEN ? AND ?");
             statement.setString(1, date);
             statement.setFloat(2, latMin);
             statement.setFloat(3, latMax);
@@ -162,6 +166,8 @@ public class DBLocationFinder
             }
 
             rs.close();
+            statement.close();
+            con.close();
         }
         catch (SQLException getNoticesSQLError)
         {

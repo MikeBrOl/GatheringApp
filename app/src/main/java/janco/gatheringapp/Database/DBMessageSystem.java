@@ -2,6 +2,7 @@ package janco.gatheringapp.Database;
 
 import android.util.Log;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,11 +14,11 @@ import janco.gatheringapp.Model.UserConnection;
  */
 public class DBMessageSystem
 {
-    private DBConnection con;
+    private DBConnection dbConnection;
 
     public DBMessageSystem()
     {
-        con = new DBConnection();
+        this.dbConnection = new DBConnection();
     }
 
     public int createTable(String tableName)
@@ -25,9 +26,13 @@ public class DBMessageSystem
         int check = 1;
         try
         {
-           Statement stmt = con.CONN().createStatement();
-            String query = "IF EXISTS(SELECT * FROM dmaa0214_4Sem_Gruppe2.INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = '"+tableName+"')" +
-                    "BEGIN PRINT 'Table exists' END ELSE CREATE TABLE "+tableName+"([ID][int]IDENTITY(1,1)NOT NULL PRIMARY KEY, [Message][TEXT]NULL)";
+            Connection con = dbConnection.CONN();
+
+           Statement stmt = con.createStatement();
+            String query = "IF EXISTS(SELECT * FROM dmaa0214_4Sem_Gruppe2." +
+                    "INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = '" + tableName + "')" +
+                    "BEGIN PRINT 'Table exists' END ELSE CREATE TABLE " + tableName +
+                    "([ID][int]IDENTITY(1,1)NOT NULL PRIMARY KEY, [Message][TEXT]NULL)";
             Log.e("Query:",query);
             check = stmt.executeUpdate(query);
 
@@ -38,6 +43,8 @@ public class DBMessageSystem
             //Insert message
             //Update UserConnection with table name
             //rollback possibility
+            stmt.close();
+            con.close();
         }
         catch (SQLException createTableException)
         {
@@ -52,9 +59,14 @@ public class DBMessageSystem
 
         try
         {
-            Statement stmt = con.CONN().createStatement();
-            String query = "INSERT INTO "+tableName+"(Message) Values('"+message+"')";
+            Connection con = dbConnection.CONN();
+
+            Statement stmt = con.createStatement();
+            String query = "INSERT INTO " + tableName + "(Message) Values('" + message + "')";
             check = stmt.executeUpdate(query);
+
+            stmt.close();
+            con.close();
         }
         catch(SQLException insertMessageException)
         {

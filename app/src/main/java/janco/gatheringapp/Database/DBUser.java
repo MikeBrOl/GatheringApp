@@ -67,6 +67,8 @@ public class DBUser
             user.setID(rs.getInt("ID"));
 
             rs.close();
+            con.close();
+            stmt.close();
 
 
         }catch (Exception e)
@@ -120,6 +122,8 @@ public class DBUser
                 userList.add(user);
             }
             rs.close();
+            stmt.close();
+            con.close();
 
         }
         catch (Exception e)
@@ -170,6 +174,8 @@ public class DBUser
             Log.e("Query:", query);
             check = stmt.executeUpdate(query);
 
+            stmt.close();
+            con.close();
         }
         catch (Exception e)
         {
@@ -206,6 +212,8 @@ public class DBUser
 
             check = stmt.executeUpdate(query);
 
+            stmt.close();
+            con.close();
         }
         catch (Exception e)
         {
@@ -271,7 +279,8 @@ public class DBUser
 
             check = stmt.executeUpdate(query);
 
-
+            stmt.close();
+            con.close();
         }
         catch (Exception e)
         {
@@ -333,6 +342,8 @@ public class DBUser
             user.setID(rs.getInt("ID"));
 
             rs.close();
+            stmt.close();
+            con.close();
         }
         catch (Exception e)
         {
