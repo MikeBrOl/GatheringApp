@@ -2,6 +2,7 @@ package janco.gatheringapp.Database;
 
 import android.util.Log;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,11 +14,11 @@ import janco.gatheringapp.Model.UserConnection;
  */
 public class DBMessageSystem
 {
-    private DBConnection con;
+    private DBConnection dbConnection;
 
     public DBMessageSystem()
     {
-        con = new DBConnection();
+        this.dbConnection = new DBConnection();
     }
 
     public int createTable(String tableName, UserConnection userConnection)
@@ -42,12 +43,13 @@ public class DBMessageSystem
             //Insert message
             //Update UserConnection with table name
             //rollback possibility
+            stmt.close();
+            con.close();
         }
         catch (SQLException createTableException)
         {
             Log.e("Error in creating table", createTableException.toString());
         }
-
         return check;
     }
 
@@ -60,13 +62,14 @@ public class DBMessageSystem
             Statement stmt = con.CONN().createStatement();
             String query = "INSERT INTO "+tableName+"(Message, Sender) Values('"+message+"', '"+userName+"')";
             check = stmt.executeUpdate(query);
+
             stmt.close();
+            con.close();
         }
         catch(SQLException insertMessageException)
         {
             Log.e("Error inserting message", insertMessageException.toString());
         }
-
         return check;
     }
 }

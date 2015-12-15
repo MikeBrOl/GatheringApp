@@ -54,6 +54,9 @@ public class DBNotice
             stmt.setFloat(6, lon);
 
             check = stmt.executeUpdate();
+
+            stmt.close();
+            con.close();
         }
         catch (Exception e)
         {
@@ -78,6 +81,9 @@ public class DBNotice
 
             stmt.setString(1, name);
             check = stmt.executeUpdate();
+
+            stmt.close();
+            con.close();
         }
         catch (Exception e)
         {
@@ -117,6 +123,9 @@ public class DBNotice
             notice.setAddress(rs.getString("Address"));
             notice.setTime(rs.getString("Time"));
 
+            rs.close();
+            stmt.close();
+            con.close();
         }
         catch (Exception e)
         {
