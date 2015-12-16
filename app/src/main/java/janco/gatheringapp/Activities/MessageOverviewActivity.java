@@ -1,6 +1,7 @@
 package janco.gatheringapp.Activities;
 
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ public class MessageOverviewActivity extends AppCompatActivity {
                 new int[] {android.R.id.text1, android.R.id.text2});
         messageListView.setAdapter(adapter);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     public void sendMessage(View view)

@@ -14,21 +14,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.LoginActivity">
+        <activity android:name=".Activities.LoginActivity" android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.CreateNewUserActivity" />
-        <activity android:name=".Activities.NoticeOverviewActivity" />
-        <activity android:name=".Activities.CreateNotice" />
-        <activity android:name=".Activities.CreateNoticeSelectDateAndTime" />
-        <activity android:name=".Activities.NoticeView" />
-        <activity android:name=".Activities.UserConnectionActivity" />
-        <activity android:name=".Activities.MessageOverviewActivity" />
-        <activity android:name=".Activities.UserConnectionHistoryActivity" />
+        <activity android:name=".Activities.CreateNewUserActivity" android:screenOrientation="portrait" />
+        <activity android:name=".Activities.NoticeOverviewActivity" android:screenOrientation="portrait" />
+        <activity android:name=".Activities.CreateNotice" android:screenOrientation="portrait" />
+        <activity android:name=".Activities.CreateNoticeSelectDateAndTime"  android:screenOrientation="portrait" />
+        <activity android:name=".Activities.NoticeView" android:screenOrientation="portrait" />
+        <activity android:name=".Activities.UserConnectionActivity" android:screenOrientation="portrait" />
+        <activity android:name=".Activities.MessageOverviewActivity" android:screenOrientation="portrait" />
+        <activity android:name=".Activities.UserConnectionHistoryActivity" android:screenOrientation="portrait" />
     </application>
 
 </manifest>

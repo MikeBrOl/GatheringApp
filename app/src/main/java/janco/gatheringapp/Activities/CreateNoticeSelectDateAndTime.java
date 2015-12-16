@@ -2,6 +2,7 @@ package janco.gatheringapp.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ public class CreateNoticeSelectDateAndTime extends AppCompatActivity {
         setContentView(R.layout.activity_create_notice_select_date_and_time);
         TimePicker timePicker = (TimePicker) findViewById(R.id.createNoticeTimePicker);
         timePicker.setIs24HourView(true);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     public void returnToCreateNotice(View view)

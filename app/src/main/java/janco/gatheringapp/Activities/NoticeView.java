@@ -1,5 +1,6 @@
 package janco.gatheringapp.Activities;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -27,5 +28,7 @@ public class NoticeView extends AppCompatActivity {
         noticeDescriptionTV.setText(notice.getDescription());
         noticeAddressTV.setText(notice.getAddress());
         noticeTimeTV.setText(notice.getTime());
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 }
