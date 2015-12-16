@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="janco.gatheringapp.Activities.CreateNotice">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:hint="@string/createNoticeNameHint"
+        android:id="@+id/createNoticeName"
+        android:layout_above="@+id/createNoticeDescription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="42dp"
+        android:singleLine="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:inputType="textMultiLine"
+        android:hint="@string/createNoticeDescriptionHint"
+        android:id="@+id/createNoticeDescription"
+        android:layout_above="@+id/createNoticeAddress"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="37dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:hint="@string/createNoticeAddressHint"
+        android:id="@+id/createNoticeAddress"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/createNoticeButton"
+        android:layout_alignEnd="@+id/createNoticeButton"
+        android:singleLine="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/createNoticeButtonText"
+        android:id="@+id/createNoticeButton"
+        android:onClick="createNotice"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="41dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/createNoticeSelectTimeAndDate"
+        android:id="@+id/createNoticeSelectTimeAndDate"
+        android:layout_below="@+id/createNoticeAddress"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:onClick="selectDateAndTime"/>
+
+
+</RelativeLayout>
