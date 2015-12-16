@@ -53,12 +53,17 @@ public class DBMessageSystemTest extends AndroidTestCase
     public void testFindMessagesByUserName()
     {
         boolean success = false;
-        String userName = "Kim";
+        int index = 0;
+        String userName = "mad_mike";
         ArrayList<String> chats = system.getChatsByUserName(userName);
-        if(chats.size()>0)
+                while(chats.size() > index)
         {
-                    success = true;
-        }
+            Log.e("Nuværede Tabel", chats.get(index));
+            index++;
+        }if(chats.size()>0)
+    {
+        success = true;
+    }
 
         Assert.assertEquals(true, success);
     }

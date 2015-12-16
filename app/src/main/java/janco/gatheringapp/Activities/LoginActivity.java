@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor editor = mySharedPreferences.edit();
             editor.putInt("UserID", user.getID());
+            editor.putString("UserName", user.getUsername());
             editor.apply();
             LocationManager locationManager = (LocationManager)
                     getSystemService(Context.LOCATION_SERVICE);
