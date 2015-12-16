@@ -2,11 +2,12 @@ package janco.gatheringapp.Model;
 
 
 import com.google.android.maps.GeoPoint;
+import java.io.Serializable;
 
 /**
  * Created by Torn on 02-12-2015.
  */
-public class User
+public class User implements Serializable
 {
     String username;
     String name;

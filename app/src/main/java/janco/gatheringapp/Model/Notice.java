@@ -2,11 +2,12 @@ package janco.gatheringapp.Model;
 
 
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Created by Mads on 01-12-2015.
  */
-public class Notice
+public class Notice implements Serializable
 {
     String name;
     String description;
