@@ -28,16 +28,11 @@ import janco.gatheringapp.R;
 public class UserConnectionHistoryActivity extends AppCompatActivity
 {
     private User userLoggedIn;
-    private DBUser dbUser;
     private DBMessageSystem dbMessageSystem;
 
     private String userName;
 
-    private String date;
-    private int radius;
     private ListView historyListView;
-
-    private final static String EXTRA_MESSAGE = "janco.gatheringapp.Activities.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
