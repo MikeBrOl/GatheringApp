@@ -1,10 +1,11 @@
 package janco.gatheringapp.Model;
 
+import java.io.Serializable;
 
 /**
  * Created by Torn on 04-12-2015.
  */
-public class UserConnection
+public class UserConnection implements Serializable
 {
     User appUser;
     User connectedUser;
