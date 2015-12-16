@@ -7,6 +7,8 @@ import junit.framework.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import janco.gatheringapp.Database.DBMessageSystem;
 import janco.gatheringapp.Database.DBUser;
@@ -71,11 +73,17 @@ public class DBMessageSystemTest extends AndroidTestCase
     public void testGetAllMessage()
     {
         boolean succes = false;
-        String tableName = "Kimmie";
-        HashMap<String, String> message = system.getAllMessages(tableName);
+        int index = 0;
+        String tableName = "julemandmad_mike";
+        List<Map<String, String>> message = system.getAllMessages(tableName);
         if(message.size() > 0)
         {
             succes = true;
+        }
+        while(message.size() > index)
+        {
+            Log.e("Message", message.get(index).get("Message"));
+            index++;
         }
 
         Assert.assertEquals(true, succes);

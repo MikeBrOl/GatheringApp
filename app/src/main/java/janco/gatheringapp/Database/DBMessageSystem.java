@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import janco.gatheringapp.Model.UserConnection;
 
@@ -97,9 +99,9 @@ public class DBMessageSystem
         return chats;
     }
 
-    public HashMap<String, String> getAllMessages(String tableName)
+    public List<Map<String, String>> getAllMessages(String tableName)
     {
-        HashMap<String, String> messages = new HashMap<>(2);
+        List<Map<String, String>> listOfMessages = new ArrayList<>();
 
         try
         {
@@ -109,8 +111,10 @@ public class DBMessageSystem
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next())
             {
+                Map<String, String> messages = new HashMap<>(2);
                 messages.put("UserName", rs.getString("Sender"));
                 messages.put("Message", rs.getString("Message"));
+                listOfMessages.add(messages);
             }
             stmt.close();
             rs.close();
@@ -120,6 +124,6 @@ public class DBMessageSystem
             Log.e("GetAllMessages", getAllMessages.toString());
         }
 
-        return messages;
+        return listOfMessages;
     }
 }
