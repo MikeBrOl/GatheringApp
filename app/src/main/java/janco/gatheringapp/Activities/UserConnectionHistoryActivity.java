@@ -81,8 +81,7 @@ public class UserConnectionHistoryActivity extends AppCompatActivity
         historyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent message = new Intent(getApplicationContext(), MessageOverviewActivity.class);
                 HashMap entry = (HashMap) parent.getItemAtPosition(position);
                 String messageTableName = entry.get("TableName").toString();
@@ -90,10 +89,10 @@ public class UserConnectionHistoryActivity extends AppCompatActivity
                 startActivity(message);
             }
 
-            });
+        });
 
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
-    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 }
