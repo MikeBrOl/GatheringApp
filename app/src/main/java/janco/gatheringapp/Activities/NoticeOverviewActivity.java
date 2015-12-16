@@ -40,8 +40,7 @@ public class NoticeOverviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notice_overview);
         algorithm = new LocationAlgorithm();
         dbUser = new DBUser();
-        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        userLoggedIn = dbUser.getUserByID(mySharedPreferences.getInt("UserID", 0));
+        userLoggedIn = (User) getIntent().getSerializableExtra("LoggedInUser");
         Calendar currentDate = Calendar.getInstance();
         StringBuilder dateString = new StringBuilder();
         dateString.append(currentDate.get(Calendar.YEAR)+"-");
@@ -78,7 +77,17 @@ public class NoticeOverviewActivity extends AppCompatActivity {
                 Intent inspectNotice = new Intent(getApplicationContext(), NoticeView.class);
                 HashMap entry = (HashMap) parent.getItemAtPosition(position);
                 String noticeName = entry.get("name").toString();
-                inspectNotice.putExtra("NoticeName", noticeName);
+
+                int index = 0;
+                while(noticeList.size() > index)
+                {
+                    if(noticeList.get(index).getName().equals(noticeName))
+                    {
+                        Notice notice = noticeList.get(index);
+                        inspectNotice.putExtra("SelectedNotice", notice);
+                    }
+                    index++;
+                }
                 startActivity(inspectNotice);
             }
         });
@@ -94,6 +103,7 @@ public class NoticeOverviewActivity extends AppCompatActivity {
     public void goToUserConnection(View view)
     {
         Intent goTO = new Intent(this, UserConnectionActivity.class);
+        goTO.putExtra("User", userLoggedIn);
         startActivity(goTO);
     }
 }

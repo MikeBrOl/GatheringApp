@@ -49,11 +49,6 @@ public class LoginActivity extends AppCompatActivity {
 
         if(pe.checkPassword(passwordString, encryptedPassword))
         {
-            SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-            SharedPreferences.Editor editor = mySharedPreferences.edit();
-            editor.putInt("UserID", user.getID());
-            editor.putString("UserName", user.getUsername());
-            editor.apply();
             LocationManager locationManager = (LocationManager)
                     getSystemService(Context.LOCATION_SERVICE);
             boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -81,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             user.setLastKnownLongitude(longitude);
             userDB.updateUser(user);
             Intent loginWork = new Intent(this, NoticeOverviewActivity.class);
+            loginWork.putExtra("LoggedInUser", user);
             startActivity(loginWork);
         }
         else

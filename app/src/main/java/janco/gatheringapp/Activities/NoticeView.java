@@ -15,9 +15,7 @@ public class NoticeView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_view);
-        String noticeName = getIntent().getStringExtra("NoticeName");
-        DBNotice noticeDB = new DBNotice();
-        Notice notice = noticeDB.getNoticeByName(noticeName);
+        Notice notice = (Notice)getIntent().getSerializableExtra("SelectedNotice");
 
         TextView noticeNameTextView = (TextView) findViewById(R.id.noticeViewName);
         TextView noticeDescriptionTV = (TextView) findViewById(R.id.noticeViewDescription);

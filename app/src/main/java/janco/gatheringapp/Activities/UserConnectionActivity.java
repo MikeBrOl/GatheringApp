@@ -43,8 +43,7 @@ public class UserConnectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_connection);
         algorithm = new LocationAlgorithm();
         dbUser = new DBUser();
-        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        userLoggedIn = dbUser.getUserByID(mySharedPreferences.getInt("UserID", 0));
+        userLoggedIn = (User)getIntent().getSerializableExtra("User");
         status = (Switch) findViewById(R.id.UserConnectionActivitySearchStatus);
         status.setChecked(userLoggedIn.isSearchStatus());
 
@@ -113,6 +112,7 @@ public class UserConnectionActivity extends AppCompatActivity {
                                 index ++;
                             }
                             message.putExtra("TableName", messageTableName);
+                            message.putExtra("User", userLoggedIn);
                             startActivity(message);
                         }
                     });

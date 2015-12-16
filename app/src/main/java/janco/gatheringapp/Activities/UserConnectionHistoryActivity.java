@@ -52,9 +52,8 @@ public class UserConnectionHistoryActivity extends AppCompatActivity
 
 
 
-        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        userName = (mySharedPreferences.getString("UserName", ""));
+        userLoggedIn = (User)getIntent().getSerializableExtra("User");
+        userName = userLoggedIn.getName();
 
 
 
@@ -86,6 +85,7 @@ public class UserConnectionHistoryActivity extends AppCompatActivity
                 HashMap entry = (HashMap) parent.getItemAtPosition(position);
                 String messageTableName = entry.get("TableName").toString();
                 message.putExtra("TableName", messageTableName);
+                message.putExtra("User", userLoggedIn);
                 startActivity(message);
             }
 

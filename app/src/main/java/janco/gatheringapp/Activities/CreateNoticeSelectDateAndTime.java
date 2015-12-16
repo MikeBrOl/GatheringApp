@@ -45,6 +45,7 @@ public class CreateNoticeSelectDateAndTime extends AppCompatActivity {
 
         Log.e("Selected Date and Time", selectedDateAndTime.toString());
 
+        //TODO Find an alternative to using preferences to save date.
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = mySharedPreferences.edit();
         editor.putString("Date", selectedDateAndTime.toString());

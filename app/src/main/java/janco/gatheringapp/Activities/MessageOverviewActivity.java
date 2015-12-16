@@ -16,10 +16,12 @@ import java.util.List;
 import java.util.Map;
 
 import janco.gatheringapp.Database.DBMessageSystem;
+import janco.gatheringapp.Model.User;
 import janco.gatheringapp.R;
 
 public class MessageOverviewActivity extends AppCompatActivity {
     String tableName;
+    User userLoggedIn;
     String userName;
     ListView messageListView;
     DBMessageSystem system;
@@ -28,9 +30,9 @@ public class MessageOverviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_overview);
-        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         tableName = getIntent().getStringExtra("TableName");
-        userName = mySharedPreferences.getString("UserName", "");
+        userLoggedIn = (User)getIntent().getSerializableExtra("User");
+        userName = userLoggedIn.getName();
         messageListView = (ListView) findViewById(R.id.messageOverviewList);
         system = new DBMessageSystem();
 
