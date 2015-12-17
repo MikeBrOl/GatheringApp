@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Activities.LoginActivity">
+    tools:context=".Activities.LoginActivity"
+    android:background="@color/background">
 
     <EditText
         android:layout_width="wrap_content"
@@ -16,12 +17,13 @@
         android:text=""
         android:ems="10"
         android:id="@+id/userNameInput"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:hint="@string/userNameInputHint"
         android:singleLine="true"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="20dp" />
+        android:layout_above="@+id/passwordInput"
+        android:layout_alignLeft="@+id/passwordInput"
+        android:layout_alignStart="@+id/passwordInput"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -34,7 +36,8 @@
         android:text=""
         android:hint="@string/passwordInputHint"
         android:singleLine="true"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="10dp" />
 
     <Button
         android:layout_width="wrap_content"
