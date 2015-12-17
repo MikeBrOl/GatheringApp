@@ -2,6 +2,7 @@ package janco.gatheringapp.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,7 +55,16 @@ public class NoticeOverviewActivity extends AppCompatActivity {
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         radius = mySharedPreferences.getInt("Radius", 0);
         noticeListView = (ListView) findViewById(R.id.overviewListView);
-        populateLisView();
+
+        String lastKnownLat = String.valueOf(userLoggedIn.getLastKnownlatitude());
+        String lastKnownLon = String.valueOf(userLoggedIn.getLastKnownLongitude());
+        String r = String.valueOf(radius);
+
+        String[] strings = {lastKnownLat, lastKnownLon, r, date};
+        GetNoticeListAsync lba = new GetNoticeListAsync();
+        lba.execute(strings);
+
+        //populateLisView();
 
     }
 
@@ -102,49 +112,118 @@ public class NoticeOverviewActivity extends AppCompatActivity {
         editor.putInt("Radius", radius);
         editor.apply();
         Log.e("Radius", Integer.toString(radius));
-        populateLisView();
+
+        String lastKnownLat = String.valueOf(userLoggedIn.getLastKnownlatitude());
+        String lastKnownLon = String.valueOf(userLoggedIn.getLastKnownLongitude());
+        String r = String.valueOf(radius);
+
+        String[] strings = {lastKnownLat, lastKnownLon, r, date};
+        GetNoticeListAsync lba = new GetNoticeListAsync();
+        lba.execute(strings);
+
+
+        //populateLisView();
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void populateLisView()
-    {
-        final ArrayList<Notice> noticeList = algorithm.boundingBoxCalculationForNotice(userLoggedIn.getLastKnownlatitude(), userLoggedIn.getLastKnownLongitude(), radius, date);
+//    public void populateLisView()
+//    {
+//
+//        final ArrayList<Notice> noticeList = algorithm.boundingBoxCalculationForNotice(userLoggedIn.getLastKnownlatitude(), userLoggedIn.getLastKnownLongitude(), radius, date);
+//
+//        List<Map<String, String>> data = new ArrayList<>();
+//        for(Notice notice : noticeList)
+//        {
+//            Map<String, String> datum = new HashMap<>(2);
+//            datum.put("name", notice.getName());
+//            datum.put("date", notice.getTime());
+//            data.add(datum);
+//        }
+//
+//        SimpleAdapter adapter = new SimpleAdapter(NoticeOverviewActivity.this, data,
+//                android.R.layout.simple_expandable_list_item_2,
+//                new String [] {"name", "date"},
+//                new int[] {android.R.id.text1, android.R.id.text2});
+//        noticeListView.setAdapter(adapter);
+//        noticeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent inspectNotice = new Intent(getApplicationContext(), NoticeView.class);
+//                HashMap entry = (HashMap) parent.getItemAtPosition(position);
+//                String noticeName = entry.get("name").toString();
+//
+//                int index = 0;
+//                while(noticeList.size() > index)
+//                {
+//                    if(noticeList.get(index).getName().equals(noticeName))
+//                    {
+//                        Notice notice = noticeList.get(index);
+//                        inspectNotice.putExtra("SelectedNotice", notice);
+//                    }
+//                    index++;
+//                }
+//                startActivity(inspectNotice);
+//            }
+//        });
+//
+//    }
 
-        List<Map<String, String>> data = new ArrayList<>();
-        for(Notice notice : noticeList)
+
+    private class GetNoticeListAsync extends AsyncTask<String, Void, ArrayList>
+    {
+
+        @Override
+        protected ArrayList doInBackground(String... params)
         {
-            Map<String, String> datum = new HashMap<>(2);
-            datum.put("name", notice.getName());
-            datum.put("date", notice.getTime());
-            data.add(datum);
+            double lat = Double.parseDouble(params[0]);
+            double lon = Double.parseDouble(params[1]);
+            int radius = Integer.parseInt(params[2]);
+
+            ArrayList<Notice> list = algorithm.boundingBoxCalculationForNotice(lat, lon, radius, params[3]);
+            return list;
         }
 
-        SimpleAdapter adapter = new SimpleAdapter(NoticeOverviewActivity.this, data,
-                android.R.layout.simple_expandable_list_item_2,
-                new String [] {"name", "date"},
-                new int[] {android.R.id.text1, android.R.id.text2});
-        noticeListView.setAdapter(adapter);
-        noticeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent inspectNotice = new Intent(getApplicationContext(), NoticeView.class);
-                HashMap entry = (HashMap) parent.getItemAtPosition(position);
-                String noticeName = entry.get("name").toString();
-
-                int index = 0;
-                while(noticeList.size() > index)
-                {
-                    if(noticeList.get(index).getName().equals(noticeName))
-                    {
-                        Notice notice = noticeList.get(index);
-                        inspectNotice.putExtra("SelectedNotice", notice);
-                    }
-                    index++;
-                }
-                startActivity(inspectNotice);
+        @Override
+        protected void onPostExecute(ArrayList list)
+        {
+            final ArrayList<Notice> noticeList = list;
+            List<Map<String, String>> data = new ArrayList<>();
+            for(Notice notice : noticeList)
+            {
+                Map<String, String> datum = new HashMap<>(2);
+                datum.put("name", notice.getName());
+                datum.put("date", notice.getTime());
+                data.add(datum);
             }
-        });
 
+            SimpleAdapter adapter = new SimpleAdapter(NoticeOverviewActivity.this, data,
+                    android.R.layout.simple_expandable_list_item_2,
+                    new String [] {"name", "date"},
+                    new int[] {android.R.id.text1, android.R.id.text2});
+            noticeListView.setAdapter(adapter);
+            noticeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent inspectNotice = new Intent(getApplicationContext(), NoticeView.class);
+                    HashMap entry = (HashMap) parent.getItemAtPosition(position);
+                    String noticeName = entry.get("name").toString();
+
+                    int index = 0;
+                    while(noticeList.size() > index)
+                    {
+                        if(noticeList.get(index).getName().equals(noticeName))
+                        {
+                            Notice notice = noticeList.get(index);
+                            inspectNotice.putExtra("SelectedNotice", notice);
+                        }
+                        index++;
+                    }
+                    startActivity(inspectNotice);
+                }
+            });
+
+        }
     }
+
 }
