@@ -18,7 +18,7 @@
         android:id="@+id/createNoticeName"
         android:layout_above="@+id/createNoticeDescription"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="42dp"
+        android:layout_marginBottom="20dp"
         android:singleLine="true" />
 
     <EditText
@@ -28,9 +28,9 @@
         android:inputType="textMultiLine"
         android:hint="@string/createNoticeDescriptionHint"
         android:id="@+id/createNoticeDescription"
+        android:layout_marginBottom="20dp"
         android:layout_above="@+id/createNoticeAddress"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="37dp" />
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
         android:onClick="createNotice"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="41dp" />
+        android:layout_marginBottom="50dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
         android:id="@+id/createNoticeSelectTimeAndDate"
         android:layout_below="@+id/createNoticeAddress"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="20dp"
         android:onClick="selectDateAndTime"/>
 
 

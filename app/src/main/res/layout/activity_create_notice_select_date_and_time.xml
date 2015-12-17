@@ -46,7 +46,8 @@
         android:id="@+id/createNoticeTimePicker"
         android:timePickerMode="spinner"
         android:layout_below="@+id/createNoticeTimePickerLbl"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:paddingTop="5dp" />
 
     <DatePicker
         android:layout_width="wrap_content"
@@ -56,5 +57,5 @@
         android:calendarViewShown="false"
         android:layout_above="@+id/createNoticeReturnButton"
         android:layout_centerHorizontal="true"
-        />
+        android:paddingTop="140dp" />
 </RelativeLayout>

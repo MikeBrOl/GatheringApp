@@ -18,9 +18,10 @@
         android:id="@+id/userNameInput"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp"
         android:hint="@string/userNameInputHint"
-        />
+        android:singleLine="true"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="20dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -32,7 +33,8 @@
         android:layout_centerHorizontal="true"
         android:text=""
         android:hint="@string/passwordInputHint"
-        />
+        android:singleLine="true"
+        android:layout_marginBottom="20dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -52,6 +54,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="createNewUser"
-        />
+        android:layout_marginBottom="50dp" />
 
 </RelativeLayout>
