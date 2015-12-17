@@ -56,4 +56,16 @@
         android:onClick="createNewUser"
         android:layout_marginBottom="50dp" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logoImageView"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/userNameInput"
+        android:layout_alignStart="@+id/userNameInput"
+        android:layout_marginTop="57dp"
+        android:src="@drawable/logo"
+        android:layout_alignRight="@+id/userNameInput"
+        android:layout_alignEnd="@+id/userNameInput" />
+
 </RelativeLayout>
