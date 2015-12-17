@@ -38,6 +38,7 @@ public class UserConnectionActivity extends AppCompatActivity {
     private DBUser dbUser;
     private int radius;
     private Switch status;
+    private boolean userSearchStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,78 +54,73 @@ public class UserConnectionActivity extends AppCompatActivity {
 
         userListView = (ListView) findViewById(R.id.UserConnectionActivityListView);
 
-
-
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
 
-    public void goBack(View view)
-    {
-        finish();
-    }
-
-    public void connectionHistory(View view)
-    {
-        Intent userHistory = new Intent(this, UserConnectionHistoryActivity.class);
-        userHistory.putExtra("User", userLoggedIn);
-        startActivity(userHistory);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.options_menu_user_connection, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(item.getItemId() == R.id.radius500)
-        {
-            radius = 500;
-        }
-        if(item.getItemId() == R.id.radius1000)
-        {
-            radius = 1000;
-        }
-        if(item.getItemId() == R.id.radius2000)
-        {
-            radius = 2000;
-        }
-        if(item.getItemId() == R.id.radius5000)
-        {
-            radius = 5000;
-        }
-        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putInt("Radius", radius);
-        editor.apply();
-        Log.e("Radius", Integer.toString(radius));
-        populateListView();
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void populateListView()
-    {
         status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
+            userSearchStatus = isChecked;
+            populateListView();
+            }});
+        populateListView();
+    }
+
+
+
+            public void goBack(View view) {
+                finish();
+            }
+
+            public void connectionHistory(View view) {
+                Intent userHistory = new Intent(this, UserConnectionHistoryActivity.class);
+                userHistory.putExtra("User", userLoggedIn);
+                startActivity(userHistory);
+            }
+
+            @Override
+            public boolean onCreateOptionsMenu(Menu menu) {
+                getMenuInflater().inflate(R.menu.options_menu_user_connection, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onOptionsItemSelected(MenuItem item) {
+                if (item.getItemId() == R.id.radius500) {
+                    radius = 500;
+                }
+                if (item.getItemId() == R.id.radius1000) {
+                    radius = 1000;
+                }
+                if (item.getItemId() == R.id.radius2000) {
+                    radius = 2000;
+                }
+                if (item.getItemId() == R.id.radius5000) {
+                    radius = 5000;
+                }
+                SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = mySharedPreferences.edit();
+                editor.putInt("Radius", radius);
+                editor.apply();
+                Log.e("Radius", Integer.toString(radius));
+                populateListView();
+
+                return super.onOptionsItemSelected(item);
+            }
+
+            public void populateListView() {
+                if (userSearchStatus) {
                     userLoggedIn.setSearchStatus(true);
                     final ArrayList<User> userList = algorithm.boundingBoxCalculationForUsers(userLoggedIn.getLastKnownlatitude(), userLoggedIn.getLastKnownLongitude(), radius, true);
 
                     List<Map<String, String>> data = new ArrayList();
-                    for (User user : userList)
-                    {
+                    for (User user : userList) {
                         Map<String, String> datum = new HashMap<>(2);
                         datum.put("Username", user.getUsername());
                         datum.put("Name", user.getName());
                         data.add(datum);
                     }
 
-                    SimpleAdapter adapter = new SimpleAdapter(UserConnectionActivity.this, data, android.R.layout.simple_expandable_list_item_2, new String [] {"Username", "Name"}, new int[] {android.R.id.text1, android.R.id.text2});
+                    SimpleAdapter adapter = new SimpleAdapter(UserConnectionActivity.this, data, android.R.layout.simple_expandable_list_item_2, new String[]{"Username", "Name"}, new int[]{android.R.id.text1, android.R.id.text2});
                     userListView.setAdapter(adapter);
                     userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -132,57 +128,47 @@ public class UserConnectionActivity extends AppCompatActivity {
                             Intent message = new Intent(getApplicationContext(), MessageOverviewActivity.class);
                             HashMap entry = (HashMap) parent.getItemAtPosition(position);
                             String userName = entry.get("Username").toString();
-                            String messageTableName ="";
+                            String messageTableName = "";
                             int index = 0;
                             boolean found = false;
 
-                            while (!found || userList.size() > index)
-                            {
-                                if(userList.get(index).getUsername().compareTo(userName)==0)
-                                {
+                            while (!found || userList.size() > index) {
+                                if (userList.get(index).getUsername().compareTo(userName) == 0) {
                                     User user = userList.get(index);
                                     UserConnection userConnection = new UserConnection(userLoggedIn, user);
                                     DBUserConnection dbUserConnection = new DBUserConnection();
 
-                                    if(dbUserConnection.insertUserConnection(userConnection)==0)
-                                    {
+                                    if (dbUserConnection.insertUserConnection(userConnection) == 0) {
                                         UserConnection alternativeUserConnection = dbUserConnection.checkForExistingUserConnection(userConnection.getAppUser(), userConnection.getConnectedUser());
-                                        messageTableName = alternativeUserConnection.getAppUser().getUsername()+
+                                        messageTableName = alternativeUserConnection.getAppUser().getUsername() +
                                                 alternativeUserConnection.getConnectedUser().getUsername();
-                                    }
-                                    else
-                                    {
-                                        messageTableName = userConnection.getAppUser().getUsername()+
+                                    } else {
+                                        messageTableName = userConnection.getAppUser().getUsername() +
                                                 userConnection.getConnectedUser().getUsername();
                                         Log.e("Table Name", messageTableName);
                                     }
 
                                     found = true;
-                                }
-                                else
-                                {
+                                } else {
                                     Toast badShit = Toast.makeText(getApplicationContext(), R.string.ConnectionErrorToast, Toast.LENGTH_LONG);
                                     badShit.show();
                                 }
 
-                                index ++;
+                                index++;
                             }
                             message.putExtra("TableName", messageTableName);
                             message.putExtra("User", userLoggedIn);
                             startActivity(message);
                         }
                     });
-                }
-                else
-                {
+                } else {
                     userLoggedIn.setSearchStatus(false);
                 }
 
                 dbUser.updateUser(userLoggedIn);
             }
-        });
-    }
-
-
 
 }
+
+
+
