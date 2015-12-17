@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import janco.gatheringapp.R;
 public class LoginActivity extends AppCompatActivity {
     private float latitude;
     private float longitude;
+    private User u;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -40,12 +42,11 @@ public class LoginActivity extends AppCompatActivity {
         String loginString = loginUserName.getText().toString();
         String passwordString = password.getText().toString();
 
-        DBUser userDB = new DBUser();
-
-        User user = userDB.getUserByUsername(loginString);
+        LoginAsync login = new LoginAsync();
+        login.execute(loginString);
 
         BasicPasswordEncryptor pe = new BasicPasswordEncryptor();
-        String encryptedPassword = user.getPassword();
+        String encryptedPassword = u.getPassword();
 
         if(pe.checkPassword(passwordString, encryptedPassword))
         {
@@ -72,11 +73,14 @@ public class LoginActivity extends AppCompatActivity {
                 Toast locationNotAvailable = Toast.makeText(this, R.string.locationNotAvailable, Toast.LENGTH_SHORT);
                 locationNotAvailable.show();
             }
-            user.setLastKnownlatitude(latitude);
-            user.setLastKnownLongitude(longitude);
-            userDB.updateUser(user);
+            u.setLastKnownlatitude(latitude);
+            u.setLastKnownLongitude(longitude);
+
+            UpdateUserAsync updateUser = new UpdateUserAsync();
+            updateUser.execute(u);
+
             Intent loginWork = new Intent(this, NoticeOverviewActivity.class);
-            loginWork.putExtra("LoggedInUser", user);
+            loginWork.putExtra("LoggedInUser", u);
             startActivity(loginWork);
         }
         else
@@ -109,5 +113,41 @@ public class LoginActivity extends AppCompatActivity {
     {
         latitude = (float) location.getLatitude();
         longitude = (float) location.getLongitude();
+    }
+
+    private class LoginAsync extends AsyncTask <String, Void, User>
+    {
+
+        @Override
+        protected User doInBackground(String... params)
+        {
+            DBUser dbUser = new DBUser();
+            String username = params[0];
+
+            User user = dbUser.getUserByUsername(username);
+
+            return user;
+        }
+
+        @Override
+        protected void onPostExecute(User user)
+        {
+           u = user;
+        }
+    }
+
+    private class UpdateUserAsync extends AsyncTask <User, Void, Void>
+    {
+
+        @Override
+        protected Void doInBackground(User... params)
+        {
+            DBUser dbUser = new DBUser();
+            User user = params[0];
+
+            dbUser.updateUser(user);
+
+            return null;
+        }
     }
 }
