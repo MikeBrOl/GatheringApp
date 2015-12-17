@@ -41,6 +41,7 @@ public class UserConnectionActivity extends AppCompatActivity {
     private int radius;
     private Switch status;
     private boolean userSearchStatus;
+    private DBMessageSystem dbSystem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class UserConnectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_connection);
         algorithm = new LocationAlgorithm();
         dbUser = new DBUser();
+        dbSystem = new DBMessageSystem();
         userLoggedIn = (User) getIntent().getSerializableExtra("User");
         status = (Switch) findViewById(R.id.UserConnectionActivitySearchStatus);
         status.setChecked(userLoggedIn.isSearchStatus());
@@ -187,9 +189,12 @@ public class UserConnectionActivity extends AppCompatActivity {
                                 UserConnection alternativeUserConnection = dbUserConnection.checkForExistingUserConnection(userConnection.getAppUser(), userConnection.getConnectedUser());
                                 messageTableName = alternativeUserConnection.getAppUser().getUsername() +
                                         alternativeUserConnection.getConnectedUser().getUsername();
+                                dbSystem.createTable(messageTableName, alternativeUserConnection);
+
                             } else {
                                 messageTableName = userConnection.getAppUser().getUsername() +
                                         userConnection.getConnectedUser().getUsername();
+                                dbSystem.createTable(messageTableName, userConnection);
                                 Log.e("Table Name", messageTableName);
                             }
 
