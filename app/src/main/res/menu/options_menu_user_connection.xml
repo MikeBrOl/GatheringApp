@@ -6,6 +6,24 @@
     <item android:id="@+id/radius"
         android:title="@string/radius"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom"
-        android:actionLayout="@layout/radius_choices"/>
+        app:showAsAction="ifRoom">
+        <menu>
+            <item android:id="@+id/radius500"
+                android:title="@string/radius500"
+                android:orderInCategory="100"
+                app:showAsAction="ifRoom"/>
+            <item android:id="@+id/radius1000"
+                android:title="@string/radius1000"
+                android:orderInCategory="50"
+                app:showAsAction="ifRoom"/>
+            <item android:id="@+id/radius2000"
+                android:title="@string/radius2000"
+                android:orderInCategory="25"
+                app:showAsAction="ifRoom"/>
+            <item android:id="@+id/radius5000"
+                android:title="@string/radius5000"
+                android:orderInCategory="0"
+                app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
 </menu>

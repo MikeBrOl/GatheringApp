@@ -48,11 +48,65 @@ public class UserConnectionActivity extends AppCompatActivity {
         userLoggedIn = (User)getIntent().getSerializableExtra("User");
         status = (Switch) findViewById(R.id.UserConnectionActivitySearchStatus);
         status.setChecked(userLoggedIn.isSearchStatus());
-
-        radius = 10000;
+        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        radius = mySharedPreferences.getInt("Radius", 0);
 
         userListView = (ListView) findViewById(R.id.UserConnectionActivityListView);
 
+
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    public void goBack(View view)
+    {
+        finish();
+    }
+
+    public void connectionHistory(View view)
+    {
+        Intent userHistory = new Intent(this, UserConnectionHistoryActivity.class);
+        userHistory.putExtra("User", userLoggedIn);
+        startActivity(userHistory);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.options_menu_user_connection, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == R.id.radius500)
+        {
+            radius = 500;
+        }
+        if(item.getItemId() == R.id.radius1000)
+        {
+            radius = 1000;
+        }
+        if(item.getItemId() == R.id.radius2000)
+        {
+            radius = 2000;
+        }
+        if(item.getItemId() == R.id.radius5000)
+        {
+            radius = 5000;
+        }
+        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putInt("Radius", radius);
+        editor.apply();
+        Log.e("Radius", Integer.toString(radius));
+        populateListView();
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void populateListView()
+    {
         status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -119,45 +173,14 @@ public class UserConnectionActivity extends AppCompatActivity {
                         }
                     });
                 }
-                        else
-                        {
-                            userLoggedIn.setSearchStatus(false);
-                        }
+                else
+                {
+                    userLoggedIn.setSearchStatus(false);
+                }
 
-                        dbUser.updateUser(userLoggedIn);
-                    }
-                });
-
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
-
-    public void goBack(View view)
-    {
-        finish();
-    }
-
-    public void connectionHistory(View view)
-    {
-        Intent userHistory = new Intent(this, UserConnectionHistoryActivity.class);
-        userHistory.putExtra("User", userLoggedIn);
-        startActivity(userHistory);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.options_menu_user_connection, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        if(id==R.id.radius){
-
-
-        }
-        return super.onOptionsItemSelected(item);
+                dbUser.updateUser(userLoggedIn);
+            }
+        });
     }
 
 

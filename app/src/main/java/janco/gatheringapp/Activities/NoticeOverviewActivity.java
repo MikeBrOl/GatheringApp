@@ -1,6 +1,8 @@
 package janco.gatheringapp.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,14 +47,68 @@ public class NoticeOverviewActivity extends AppCompatActivity {
         dateString.append((currentDate.get(Calendar.MONTH)+1)+"-");
         dateString.append(currentDate.get(Calendar.DAY_OF_MONTH)+" ");
         dateString.append(currentDate.get(Calendar.HOUR_OF_DAY)+":");
-        dateString.append(currentDate.get(Calendar.MINUTE)+":");
+        dateString.append(currentDate.get(Calendar.MINUTE) + ":");
         dateString.append(currentDate.get(Calendar.SECOND));
-        String date = dateString.toString();
+        date = dateString.toString();
         Log.e("Date Overview", date);
-
-        radius = 2000;
-
+        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        radius = mySharedPreferences.getInt("Radius", 0);
         noticeListView = (ListView) findViewById(R.id.overviewListView);
+        populateLisView();
+
+    }
+
+    public void goToCreateNotice(View view)
+    {
+        Intent goTo = new Intent(this, CreateNotice.class);
+        startActivity(goTo);
+    }
+
+    public void goToUserConnection(View view)
+    {
+        Intent goTO = new Intent(this, UserConnectionActivity.class);
+        goTO.putExtra("User", userLoggedIn);
+        startActivity(goTO);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.options_menu_notice_overview, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.e("Case", Integer.toString(item.getItemId()));
+        if(item.getItemId() == R.id.radius500)
+        {
+            radius = 500;
+        }
+        if(item.getItemId() == R.id.radius1000)
+        {
+            radius = 1000;
+        }
+        if(item.getItemId() == R.id.radius2000)
+        {
+            radius = 2000;
+        }
+        if(item.getItemId() == R.id.radius5000)
+        {
+            radius = 5000;
+        }
+        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putInt("Radius", radius);
+        editor.apply();
+        Log.e("Radius", Integer.toString(radius));
+        populateLisView();
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void populateLisView()
+    {
         final ArrayList<Notice> noticeList = algorithm.boundingBoxCalculationForNotice(userLoggedIn.getLastKnownlatitude(), userLoggedIn.getLastKnownLongitude(), radius, date);
 
         List<Map<String, String>> data = new ArrayList<>();
@@ -90,34 +146,5 @@ public class NoticeOverviewActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void goToCreateNotice(View view)
-    {
-        Intent goTo = new Intent(this, CreateNotice.class);
-        startActivity(goTo);
-    }
-
-    public void goToUserConnection(View view)
-    {
-        Intent goTO = new Intent(this, UserConnectionActivity.class);
-        goTO.putExtra("User", userLoggedIn);
-        startActivity(goTO);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.options_menu_notice_overview, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        if(id==R.id.radius){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
