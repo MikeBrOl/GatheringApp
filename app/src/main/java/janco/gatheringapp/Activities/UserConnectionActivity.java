@@ -110,7 +110,7 @@ public class UserConnectionActivity extends AppCompatActivity {
             public void populateListView() {
                 if (userSearchStatus) {
                     userLoggedIn.setSearchStatus(true);
-                    final ArrayList<User> userList = algorithm.boundingBoxCalculationForUsers(userLoggedIn.getLastKnownlatitude(), userLoggedIn.getLastKnownLongitude(), radius, true);
+                    final ArrayList<User> userList = algorithm.boundingBoxCalculationForUsers(userLoggedIn.getLastKnownlatitude(), userLoggedIn.getLastKnownLongitude(), radius, true, userLoggedIn.getID());
 
                     List<Map<String, String>> data = new ArrayList();
                     for (User user : userList) {

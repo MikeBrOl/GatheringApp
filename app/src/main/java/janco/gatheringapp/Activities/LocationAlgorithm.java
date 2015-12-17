@@ -75,7 +75,7 @@ public class LocationAlgorithm
      * @return ArrayList<User> with all the available users within the given radius based of the
      *         latitude and longitude of the current position
      */
-    public ArrayList<User> boundingBoxCalculationForUsers(double latitude, double longitude, double radius, boolean status)
+    public ArrayList<User> boundingBoxCalculationForUsers(double latitude, double longitude, double radius, boolean status, int id)
     {
         ArrayList<User> listOfUsersInRadius = new ArrayList<>();
         double latVar;
@@ -93,7 +93,7 @@ public class LocationAlgorithm
         lonMin = longitude-lonVar;
         lonMax = longitude+lonVar;
 
-        listOfUsersInRadius.addAll(locationQuery.getUsersByRadiusAndStatus(latMax, latMin, lonMax, lonMin, status));
+        listOfUsersInRadius.addAll(locationQuery.getUsersByRadiusAndStatus(latMax, latMin, lonMax, lonMin, status, id));
 
         return listOfUsersInRadius;
     }
