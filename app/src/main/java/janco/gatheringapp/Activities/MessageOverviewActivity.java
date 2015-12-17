@@ -49,6 +49,7 @@ public class MessageOverviewActivity extends AppCompatActivity {
         String message = textMessage.getText().toString();
         system.insertMessage(message, tableName, userName);
         populateListView();
+        textMessage.setText("");
     }
 
     public void populateListView()
