@@ -40,4 +40,10 @@
     <string name="HistoryBackButtonText">Tilbage</string>
     //MessageOviewActivity
     <string name="messageSendButton">Send</string>
+    //OptionMenu
+    <string name="radius">Sæt Radius</string>
+    <string name="radius500">500 Meter</string>
+    <string name="radius1000"> 1 km</string>
+    <string name="radius2000"> 2 km</string>
+    <string name="radius5000"> 5 km</string>
 </resources>
